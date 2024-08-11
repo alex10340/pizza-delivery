@@ -19,7 +19,10 @@ export function DealsSlider() {
 
   return (
     <>
-      <h2 className="scroll-m-20 text-center pb-2 text-3xl font-semibold tracking-tight text-white">
+      <h2
+        className="scroll-m-20 text-center pb-2 text-3xl font-semibold tracking-tight text-white underline
+       decoration-yellow-400 underline-offset-8 decoration-dashed	"
+      >
         Hot Deals
       </h2>
       <Carousel
