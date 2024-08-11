@@ -4,6 +4,8 @@ import Image from "next/image";
 import pizza1 from "../assets/pizza1.jpg";
 import pizza2 from "../assets/pizza2.jpg";
 
+import { DealsSlider } from "@/components/DealsSlider";
+
 export default function Home() {
   return (
     <div className="relative h-[600px] flex items-center justify-center bg-black/60">
@@ -15,7 +17,7 @@ export default function Home() {
         className="absolute inset-0 z-[-1]"
       />
 
-      <div className=" text-white max-w-[400px]">
+      <div className="text-white max-w-[400px]">
         <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
           Delicious Pizza,
           <br />
@@ -30,6 +32,9 @@ export default function Home() {
           <Pizza className="mr-2" />
           Order Now
         </Button>
+      </div>
+      <div className="ml-48">
+        <DealsSlider />
       </div>
     </div>
   );
