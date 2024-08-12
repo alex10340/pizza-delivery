@@ -25,7 +25,7 @@ const MenuSection = () => {
               <CardDescription>{pizza.description}</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="relative w-full h-0 pb-[100%]">
+              <div className="relative w-full h-0 pb-[75%]">
                 <Image
                   src={`/menu/pizzas/${pizza.image}`}
                   alt="pizza image"
@@ -35,7 +35,7 @@ const MenuSection = () => {
               </div>
             </CardContent>
             <CardFooter className="flex justify-between">
-              <p>${pizza.price}</p>
+              <p className="text-lg ">${pizza.price}</p>
               <Button>Add to order</Button>
             </CardFooter>
           </Card>
