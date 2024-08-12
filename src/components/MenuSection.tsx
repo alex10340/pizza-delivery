@@ -24,13 +24,14 @@ const MenuSection = () => {
               <CardDescription>{pizza.description}</CardDescription>
             </CardHeader>
             <CardContent>
-              <p>Card Content</p>
-              <Image
-                width={50}
-                height={50}
-                src={`/menu/pizzas/${pizza.image}`}
-                alt="pizza image"
-              ></Image>
+              <div className="relative w-full h-0 pb-[100%]">
+                <Image
+                  src={`/menu/pizzas/${pizza.image}`}
+                  alt="pizza image"
+                  fill
+                  className="object-cover"
+                />
+              </div>
             </CardContent>
             <CardFooter>
               <p>Card Footer</p>
