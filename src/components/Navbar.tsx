@@ -14,9 +14,9 @@ const Navbar = () => {
         </div>
         <div className="absolute left-1/2 transform -translate-x-1/2">
           <div className="space-x-2">
-            <Button>Home</Button>
-            <Button>Menu</Button>
-            <Button>Locations</Button>
+            <Button variant={"ghost"}>Home</Button>
+            <Button variant={"ghost"}>Menu</Button>
+            <Button variant={"ghost"}>Locations</Button>
           </div>
         </div>
         <Button>

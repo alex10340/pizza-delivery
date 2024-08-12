@@ -1,101 +1,90 @@
-interface Pizza {
+export interface Pizza {
   id: number;
   name: string;
   description: string;
   price: number;
-  vegetarian: boolean;
+  image: string;
 }
 
-const pizzas: Pizza[] = [
+export const pizzas: Pizza[] = [
   {
     id: 1,
     name: "Margherita Pizza",
     description:
-      "Classic pizza topped with fresh tomatoes, mozzarella, and basil.",
+      "Classic pizza with tomato sauce, mozzarella cheese, and fresh basil.",
     price: 8.99,
-    vegetarian: true,
+    image: "margherita.jpg",
   },
   {
     id: 2,
     name: "Pepperoni Pizza",
-    description: "Spicy pepperoni slices over a bed of mozzarella cheese.",
+    description:
+      "A fan favorite with tomato sauce, mozzarella cheese, and spicy pepperoni slices.",
     price: 10.99,
-    vegetarian: false,
+    image: "pepperoni.jpg",
   },
   {
     id: 3,
     name: "BBQ Chicken Pizza",
-    description: "Grilled chicken with BBQ sauce, red onions, and cilantro.",
+    description:
+      "Pizza topped with smoky BBQ sauce, grilled chicken, red onions, and mozzarella cheese.",
     price: 12.49,
-    vegetarian: false,
+    image: "bbq_chicken.jpg",
   },
   {
     id: 4,
-    name: "Vegetarian Supreme Pizza",
+    name: "Hawaiian Pizza",
     description:
-      "A mix of bell peppers, onions, olives, mushrooms, and mozzarella.",
+      "A tropical twist with tomato sauce, mozzarella cheese, ham, and pineapple chunks.",
     price: 11.99,
-    vegetarian: true,
+    image: "hawaiian.jpg",
   },
   {
     id: 5,
-    name: "Hawaiian Pizza",
-    description: "Ham, pineapple, and mozzarella on a tangy tomato sauce base.",
-    price: 11.49,
-    vegetarian: false,
+    name: "Veggie Delight Pizza",
+    description:
+      "A colorful mix of bell peppers, onions, mushrooms, olives, and mozzarella cheese on a tomato sauce base.",
+    price: 9.99,
+    image: "veggie_delight.jpg",
   },
   {
     id: 6,
     name: "Four Cheese Pizza",
     description:
-      "A delicious blend of mozzarella, cheddar, parmesan, and gorgonzola.",
-    price: 13.99,
-    vegetarian: true,
+      "A rich blend of mozzarella, cheddar, parmesan, and gorgonzola on a tomato sauce base.",
+    price: 13.49,
+    image: "four_cheese.jpg",
   },
   {
     id: 7,
-    name: "Spicy Veggie Pizza",
-    description: "Spicy jalapeños, bell peppers, onions, and mozzarella.",
-    price: 11.79,
-    vegetarian: true,
+    name: "Meat Lovers Pizza",
+    description:
+      "A hearty pizza loaded with pepperoni, sausage, ham, bacon, and mozzarella cheese.",
+    price: 14.99,
+    image: "meat_lovers.jpg",
   },
   {
     id: 8,
-    name: "Meat Lover's Pizza",
-    description: "Loaded with pepperoni, sausage, bacon, and ham.",
-    price: 14.99,
-    vegetarian: false,
+    name: "Buffalo Chicken Pizza",
+    description:
+      "Pizza topped with spicy buffalo sauce, grilled chicken, and a drizzle of ranch dressing.",
+    price: 12.99,
+    image: "buffalo_chicken.jpg",
   },
   {
     id: 9,
-    name: "Mushroom Truffle Pizza",
-    description: "Truffle oil, mushrooms, and a mix of gourmet cheeses.",
-    price: 15.49,
-    vegetarian: true,
+    name: "Spinach and Feta Pizza",
+    description:
+      "A lighter option with spinach, feta cheese, garlic, and mozzarella on a white sauce base.",
+    price: 11.49,
+    image: "spinach_feta.jpg",
   },
   {
     id: 10,
-    name: "Buffalo Chicken Pizza",
+    name: "Mushroom Truffle Pizza",
     description:
-      "Buffalo sauce, grilled chicken, red onions, and a drizzle of ranch.",
-    price: 12.99,
-    vegetarian: false,
-  },
-  {
-    id: 11,
-    name: "Mediterranean Pizza",
-    description: "Topped with feta, olives, spinach, and sun-dried tomatoes.",
-    price: 13.49,
-    vegetarian: true,
-  },
-  {
-    id: 12,
-    name: "Taco Pizza",
-    description:
-      "Ground beef, cheddar, lettuce, tomatoes, and a drizzle of sour cream.",
-    price: 13.99,
-    vegetarian: false,
+      "Gourmet pizza with wild mushrooms, truffle oil, mozzarella, and parmesan.",
+    price: 14.49,
+    image: "mushroom_truffle.jpg",
   },
 ];
-
-export default pizzas;
