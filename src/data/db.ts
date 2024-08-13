@@ -87,4 +87,20 @@ export const pizzas: Pizza[] = [
     price: 14.49,
     image: "mushroom_truffle.jpg",
   },
+  {
+    id: 11,
+    name: "Pesto Chicken Pizza",
+    description:
+      "Pizza topped with basil pesto sauce, grilled chicken, sun-dried tomatoes, and mozzarella cheese.",
+    price: 13.99,
+    image: "pesto_chicken.jpg",
+  },
+  {
+    id: 12,
+    name: "Mediterranean Pizza",
+    description:
+      "A fresh combination of olives, feta cheese, red onions, tomatoes, and spinach on a garlic olive oil base.",
+    price: 12.49,
+    image: "mediterranean.jpg",
+  },
 ];
