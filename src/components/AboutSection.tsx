@@ -11,9 +11,8 @@ const AboutSection = () => {
       <Image
         src={delivery}
         alt="pizza image"
-        layout="fill"
-        objectFit="cover"
-        className="absolute inset-0 z-[-1]"
+        fill
+        className="absolute inset-0 z-[-1] object-cover"
       />
 
       <div className="text-white max-w-[400px] text-center">
