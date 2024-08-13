@@ -4,6 +4,8 @@ export interface Pizza {
   description: string;
   price: number;
   image: string;
+  new?: boolean;
+  popular?: boolean;
 }
 
 export const pizzas: Pizza[] = [
@@ -14,6 +16,7 @@ export const pizzas: Pizza[] = [
       "Classic pizza with tomato sauce, mozzarella cheese, and fresh basil.",
     price: 8.99,
     image: "margherita.jpg",
+    popular: true,
   },
   {
     id: 2,
@@ -22,6 +25,7 @@ export const pizzas: Pizza[] = [
       "A fan favorite with tomato sauce, mozzarella cheese, and spicy pepperoni slices.",
     price: 10.99,
     image: "pepperoni.jpg",
+    popular: true,
   },
   {
     id: 3,
@@ -30,6 +34,7 @@ export const pizzas: Pizza[] = [
       "Pizza topped with smoky BBQ sauce, grilled chicken, red onions, and mozzarella cheese.",
     price: 12.49,
     image: "bbq_chicken.jpg",
+    popular: true,
   },
   {
     id: 4,
@@ -38,6 +43,7 @@ export const pizzas: Pizza[] = [
       "A tropical twist with tomato sauce, mozzarella cheese, ham, and pineapple chunks.",
     price: 11.99,
     image: "hawaiian.jpg",
+    new: true,
   },
   {
     id: 5,
@@ -46,6 +52,7 @@ export const pizzas: Pizza[] = [
       "A colorful mix of bell peppers, onions, mushrooms, olives, and mozzarella cheese on a tomato sauce base.",
     price: 9.99,
     image: "veggie_delight.jpg",
+    new: true,
   },
   {
     id: 6,
@@ -54,6 +61,7 @@ export const pizzas: Pizza[] = [
       "A rich blend of mozzarella, cheddar, parmesan, and gorgonzola on a tomato sauce base.",
     price: 13.49,
     image: "four_cheese.jpg",
+    new: true,
   },
   {
     id: 7,
