@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { MapPinned } from "lucide-react";
 import Image from "next/image";
-import backgroundImg from "../assets/pizza2.jpg";
+import backgroundImg from "../assets/pizza3.jpg";
 
 import Link from "next/link";
 
