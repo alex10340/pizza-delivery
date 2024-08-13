@@ -26,16 +26,12 @@ const Navbar = () => {
               <Button variant={"ghost"}>Menu</Button>
             </Link>
 
-            <Link href="/order">
-              <Button variant={"ghost"}>Order</Button>
-            </Link>
-
             <Link href="/locations">
               <Button variant={"ghost"}>Locations</Button>
             </Link>
           </div>
         </div>
-        <Link href="/checkout">
+        <Link href="/order">
           <Button>
             <ShoppingBag className="mr-2 h-4 w-4" /> 3 items
           </Button>

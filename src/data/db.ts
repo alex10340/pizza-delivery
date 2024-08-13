@@ -113,6 +113,32 @@ export const pizzas: Product[] = [
   },
 ];
 
+export const beverages: Product[] = [
+  {
+    id: 1,
+    name: "Cola",
+    description:
+      "A classic, refreshing cola with a crisp and fizzy taste. Perfect for pairing with your favorite pizza.",
+    price: 1.99,
+    image: "cola.jpg",
+  },
+  {
+    id: 2,
+    name: "Orange Juice",
+    description:
+      "Freshly squeezed orange juice with a sweet and tangy flavor. A refreshing choice for any time of day.",
+    price: 2.49,
+    image: "orange_juice.jpg",
+  },
+  {
+    id: 3,
+    name: "Water",
+    description: "Pure, still water to quench your thirst.",
+    price: 0.99,
+    image: "water.jpg",
+  },
+];
+
 export const desserts: Product[] = [
   {
     id: 1,

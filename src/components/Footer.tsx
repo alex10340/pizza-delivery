@@ -14,8 +14,9 @@ const Footer = () => {
         <nav className="mt-6 md:mt-0 text-center flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6">
           <Link href="/">Home</Link>
           <Link href="/#menu-section">Menu</Link>
-          <Link href="/order">Order</Link>
           <Link href="/locations">Locations</Link>
+          <p className="cursor-pointer">Privacy Policy</p>
+          <p className="cursor-pointer">Franchising</p>
         </nav>
 
         <div className="mt-6 md:mt-0 text-center md:text-right">

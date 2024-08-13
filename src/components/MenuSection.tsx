@@ -1,4 +1,4 @@
-import { pizzas } from "../data/db";
+import { beverages, desserts, pizzas } from "../data/db";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "./ui/button";
@@ -20,7 +20,7 @@ const MenuSection = () => {
       >
         Menu
       </h2>
-      <div className="grid grid-cols-4 mb-6 gap-8 p-6 py-12 mx-auto max-w-[1400px]">
+      <div className="grid grid-cols-4 gap-8 p-6 py-12 mx-auto max-w-[1400px]">
         {pizzas.map((pizza) => {
           const borderColor = pizza.popular
             ? "border-yellow-500"
@@ -72,6 +72,74 @@ const MenuSection = () => {
                   {badgeText}
                 </Badge>
               )}
+            </Card>
+          );
+        })}
+      </div>
+      <h2 className="pt-0 scroll-m-[4.4rem] border-b w-[80%] text-3xl font-semibold tracking-tight first:mt-0 text-center p-6 max-w-[1400px] mx-auto">
+        Beverages
+      </h2>
+      <div className="grid grid-cols-3 gap-8 p-6 py-12 mx-auto max-w-[1100px]">
+        {beverages.map((beverage) => {
+          return (
+            <Card
+              key={beverage.id}
+              className={`flex flex-col relative border-2 border-gray-200 hover:shadow-xl hover:scale-105 transition-all duration-300`}
+            >
+              <CardHeader className="grow">
+                <CardTitle>{beverage.name}</CardTitle>
+                <CardDescription>{beverage.description}</CardDescription>
+              </CardHeader>
+
+              <CardContent>
+                <div className="relative w-full h-0 pb-[75%]">
+                  <Image
+                    src={`/menu/beverages/${beverage.image}`}
+                    alt="beverage image"
+                    fill
+                    className="object-cover object-top rounded-xl"
+                  />
+                </div>
+              </CardContent>
+
+              <CardFooter className="flex justify-between">
+                <p className="text-lg">${beverage.price}</p>
+                <Button>Add to order</Button>
+              </CardFooter>
+            </Card>
+          );
+        })}
+      </div>
+      <h2 className="pt-0 scroll-m-[4.4rem] border-b w-[80%] text-3xl font-semibold tracking-tight first:mt-0 text-center p-6 max-w-[1400px] mx-auto">
+        Desserts
+      </h2>
+      <div className="grid grid-cols-4 gap-8 p-6 py-12 mx-auto max-w-[1400px]">
+        {desserts.map((dessert) => {
+          return (
+            <Card
+              key={dessert.id}
+              className={`flex flex-col relative border-2 border-gray-200 hover:shadow-xl hover:scale-105 transition-all duration-300`}
+            >
+              <CardHeader className="grow">
+                <CardTitle>{dessert.name}</CardTitle>
+                <CardDescription>{dessert.description}</CardDescription>
+              </CardHeader>
+
+              <CardContent>
+                <div className="relative w-full h-0 pb-[75%]">
+                  <Image
+                    src={`/menu/desserts/${dessert.image}`}
+                    alt="dessert image"
+                    fill
+                    className="object-cover object-top rounded-xl"
+                  />
+                </div>
+              </CardContent>
+
+              <CardFooter className="flex justify-between">
+                <p className="text-lg">${dessert.price}</p>
+                <Button>Add to order</Button>
+              </CardFooter>
             </Card>
           );
         })}

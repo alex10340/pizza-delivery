@@ -27,7 +27,7 @@ const Hero = () => {
           natus alias quasi perferendis facere neque voluptates quaerat, harum
           et!
         </p>
-        <Link href="/order">
+        <Link href="/#menu-section">
           <Button className="mt-12 w-[80%] text-md font-bold" size={"lg"}>
             <Pizza className="mr-2 animate-in" />
             Order Now

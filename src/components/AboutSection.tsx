@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const AboutSection = () => {
   return (
-    <div className="relative h-[600px] flex items-center justify-center bg-black/60">
+    <div className="mt-6 relative h-[600px] flex items-center justify-center bg-black/60">
       <Image
         src={backgroundImg}
         alt="pizza image"
