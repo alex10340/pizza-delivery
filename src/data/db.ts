@@ -1,4 +1,4 @@
-export interface Pizza {
+export interface Product {
   id: number;
   name: string;
   description: string;
@@ -8,7 +8,7 @@ export interface Pizza {
   popular?: boolean;
 }
 
-export const pizzas: Pizza[] = [
+export const pizzas: Product[] = [
   {
     id: 1,
     name: "Margherita Pizza",
@@ -110,5 +110,67 @@ export const pizzas: Pizza[] = [
       "A fresh combination of olives, feta cheese, red onions, tomatoes, and spinach on a garlic olive oil base.",
     price: 12.49,
     image: "mediterranean.jpg",
+  },
+];
+
+export const desserts: Product[] = [
+  {
+    id: 1,
+    name: "Four-Layer Chocolate Dessert",
+    description:
+      "A decadent treat with layers of rich chocolate mousse, cake, and whipped cream. Perfect for chocolate enthusiasts.",
+    price: 4.99,
+    image: "four_layer.jpg",
+  },
+  {
+    id: 2,
+    name: "Cherry Cream Cheese Dessert",
+    description:
+      "Smooth cream cheese filling topped with a sweet cherry compote, all on a buttery graham cracker crust.",
+    price: 5.99,
+    image: "cherry_cream_cheese.jpg",
+  },
+  {
+    id: 3,
+    name: "Vanilla Ice Cream",
+    description:
+      "Classic vanilla ice cream made with real vanilla beans for a creamy and flavorful experience.",
+    price: 2.99,
+    image: "vanilla.jpg",
+  },
+  {
+    id: 4,
+    name: "Strawberry Ice Cream",
+    description:
+      "Refreshing strawberry ice cream made with real strawberries for a fruity and delicious treat.",
+    price: 3.49,
+    image: "strawberry.jpg",
+  },
+];
+
+export const combos: Product[] = [
+  {
+    id: 1,
+    name: "2 Pizzas & Dessert",
+    description:
+      "Enjoy a fantastic combo with two delicious pizzas and two mouthwatering desserts, all for one great price.",
+    price: 29.99,
+    image: "2_pizzas_dessert.png",
+  },
+  {
+    id: 2,
+    name: "3 Pizza Offer",
+    description:
+      "Get three of your favorite pizzas at a special discounted rate. Perfect for sharing or stocking up for later!",
+    price: 32.99,
+    image: "3_pizza_offer.png",
+  },
+  {
+    id: 3,
+    name: "Pizza + Beverage",
+    description:
+      "Choose any pizza and get a complimentary beverage of your choice. A perfect meal deal for lunch or dinner.",
+    price: 12.99,
+    image: "pizza_beverage.png",
   },
 ];
