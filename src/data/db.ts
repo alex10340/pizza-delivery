@@ -120,22 +120,31 @@ export const beverages: Product[] = [
     description:
       "A classic, refreshing cola with a crisp and fizzy taste. Perfect for pairing with your favorite pizza.",
     price: 1.99,
-    image: "cola.jpg",
+    image: "cola2.jpg",
   },
   {
     id: 2,
+    name: "Water",
+    description: "Pure, still water to quench your thirst.",
+    price: 0.99,
+    image: "water.jpg",
+  },
+  {
+    id: 3,
     name: "Orange Juice",
     description:
       "Freshly squeezed orange juice with a sweet and tangy flavor. A refreshing choice for any time of day.",
     price: 2.49,
     image: "orange_juice.jpg",
   },
+
   {
-    id: 3,
-    name: "Water",
-    description: "Pure, still water to quench your thirst.",
-    price: 0.99,
-    image: "water.jpg",
+    id: 4,
+    name: "Lemonade",
+    description:
+      "A zesty and refreshing lemonade with a perfect balance of sweet and tart flavors. Ideal for a hot day.",
+    price: 2.29,
+    image: "lemonade.jpg",
   },
 ];
 

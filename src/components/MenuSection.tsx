@@ -79,7 +79,7 @@ const MenuSection = () => {
       <h2 className="pt-0 scroll-m-[4.4rem] border-b w-[80%] text-3xl font-semibold tracking-tight first:mt-0 text-center p-6 max-w-[1400px] mx-auto">
         Beverages
       </h2>
-      <div className="grid grid-cols-3 gap-8 p-6 py-12 mx-auto max-w-[1100px]">
+      <div className="grid grid-cols-4 gap-8 p-6 py-12 mx-auto max-w-[1400px]">
         {beverages.map((beverage) => {
           return (
             <Card
@@ -97,7 +97,7 @@ const MenuSection = () => {
                     src={`/menu/beverages/${beverage.image}`}
                     alt="beverage image"
                     fill
-                    className="object-cover object-top rounded-xl"
+                    className="object-cover rounded-xl"
                   />
                 </div>
               </CardContent>
