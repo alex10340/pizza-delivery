@@ -1,4 +1,4 @@
-const page = () => {
+const Locations = () => {
   return <div>Locations</div>;
 };
-export default page;
+export default Locations;

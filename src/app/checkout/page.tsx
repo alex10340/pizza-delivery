@@ -1,4 +1,4 @@
-const page = () => {
+const Checkout = () => {
   return <div>Checkout</div>;
 };
-export default page;
+export default Checkout;

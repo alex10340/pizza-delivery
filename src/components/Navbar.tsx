@@ -25,6 +25,11 @@ const Navbar = () => {
             <Link href="/#menu-section">
               <Button variant={"ghost"}>Menu</Button>
             </Link>
+
+            <Link href="/order">
+              <Button variant={"ghost"}>Order</Button>
+            </Link>
+
             <Link href="/locations">
               <Button variant={"ghost"}>Locations</Button>
             </Link>

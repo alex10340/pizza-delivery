@@ -4,6 +4,7 @@ import Image from "next/image";
 import pizza1 from "../assets/pizza1.jpg";
 
 import { DealsSlider } from "@/components/DealsSlider";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -27,10 +28,12 @@ const Hero = () => {
           natus alias quasi perferendis facere neque voluptates quaerat, harum
           et!
         </p>
-        <Button className="mt-12 w-[80%] text-md font-bold" size={"lg"}>
-          <Pizza className="mr-2" />
-          Order Now
-        </Button>
+        <Link href="/order">
+          <Button className="mt-12 w-[80%] text-md font-bold" size={"lg"}>
+            <Pizza className="mr-2" />
+            Order Now
+          </Button>
+        </Link>
       </div>
       <div className="ml-48">
         <DealsSlider />
