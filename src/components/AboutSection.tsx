@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { MapPinned } from "lucide-react";
 import Image from "next/image";
-import delivery from "../assets/delivery.jpg";
+import backgroundImg from "../assets/pizza2.jpg";
 
 import Link from "next/link";
 
@@ -9,7 +9,7 @@ const AboutSection = () => {
   return (
     <div className="relative h-[600px] flex items-center justify-center bg-black/60">
       <Image
-        src={delivery}
+        src={backgroundImg}
         alt="pizza image"
         fill
         className="absolute inset-0 z-[-1] object-cover"
