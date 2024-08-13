@@ -20,7 +20,7 @@ const MenuSection = () => {
       >
         Menu
       </h2>
-      <div className="grid grid-cols-4 gap-8 p-6 py-12 mx-auto max-w-[1400px]">
+      <div className="grid grid-cols-4 mb-6 gap-8 p-6 py-12 mx-auto max-w-[1400px]">
         {pizzas.map((pizza) => {
           const borderColor = pizza.popular
             ? "border-yellow-500"
@@ -64,7 +64,6 @@ const MenuSection = () => {
                 <Button>Add to order</Button>
               </CardFooter>
 
-              {/* Render the badge if the pizza is either new or popular */}
               {badgeText && (
                 <Badge
                   variant={"outline"}

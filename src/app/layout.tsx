@@ -22,10 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={bricolage.className}>
+      <body className={`${bricolage.className} flex flex-col min-h-screen`}>
         <Navbar />
-        {children}
-        {/* <Footer /> */}
+        <div className="grow">{children}</div>
+        <Footer />
       </body>
     </html>
   );
