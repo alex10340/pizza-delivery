@@ -72,8 +72,15 @@ export function DealsSlider() {
             );
           })}
         </CarouselContent>
-        <CarouselPrevious className="absolute top-100 mt-8 left-[30%]" />
-        <CarouselNext className="absolute top-100 mt-8 right-[30%]" />
+
+        <div className="sm:hidden">
+          <CarouselPrevious className="absolute top-100 mt-8 left-[30%]" />
+          <CarouselNext className="absolute top-100 mt-8 right-[30%]" />
+        </div>
+        <div className="hidden sm:block">
+          <CarouselPrevious />
+          <CarouselNext />
+        </div>
       </Carousel>
     </>
   );
