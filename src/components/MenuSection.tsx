@@ -15,7 +15,7 @@ const MenuSection = () => {
   return (
     <>
       <h2
-        id="menu-section"
+        id="menu"
         className=" scroll-m-[4.4rem] border-b w-[80%] text-3xl font-semibold tracking-tight first:mt-0 text-center p-6 max-w-[1400px] mx-auto"
       >
         Menu

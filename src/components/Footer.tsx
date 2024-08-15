@@ -13,7 +13,7 @@ const Footer = () => {
 
         <nav className="mt-6 md:mt-0 text-center flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-6">
           <Link href="/">Home</Link>
-          <Link href="/#menu-section">Menu</Link>
+          <Link href="/#menu">Menu</Link>
           <Link href="/locations">Locations</Link>
           <p className="cursor-pointer">Privacy Policy</p>
           <p className="cursor-pointer">Franchising</p>
