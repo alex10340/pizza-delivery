@@ -73,11 +73,11 @@ export function DealsSlider() {
           })}
         </CarouselContent>
 
-        <div className="sm:hidden">
+        <div className="lg:hidden">
           <CarouselPrevious className="absolute top-100 mt-8 left-[30%]" />
           <CarouselNext className="absolute top-100 mt-8 right-[30%]" />
         </div>
-        <div className="hidden sm:block">
+        <div className="hidden lg:block">
           <CarouselPrevious />
           <CarouselNext />
         </div>

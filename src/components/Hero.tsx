@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <div className="relative flex items-center justify-around min-[900px]:flex-row flex-col px-12 lg:px-20 p-24 bg-black/60">
+    <div className="relative flex items-center justify-around min-[900px]:flex-row flex-col px-2 md:px-16 lg:px-20 p-24 bg-black/60">
       <Image
         src={backgroundImg}
         alt="pizza image"
@@ -23,7 +23,7 @@ const Hero = () => {
             <br />
             Just a Click Away!
           </h1>
-          <p className="text-sm sm:text-base leading-7 mt-6 opacity-80">
+          <p className="text-sm sm:text-base leading-6 mt-6 opacity-80">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa eum
             natus alias quasi perferendis facere neque voluptates quaerat, harum
             et!
