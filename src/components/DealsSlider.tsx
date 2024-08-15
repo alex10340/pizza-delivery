@@ -38,15 +38,15 @@ export function DealsSlider() {
       </h2>
       <Carousel
         plugins={[plugin.current]}
-        className="w-full max-w-[250px] min-[440px]:max-w-xs lg:max-w-[350px]"
+        className="w-full max-w-xs min-[440px]:max-w-xs lg:max-w-[350px]"
         onMouseEnter={plugin.current.stop}
         onMouseLeave={plugin.current.reset}
       >
         <CarouselContent>
           {combos.map((combo) => {
             return (
-              <CarouselItem>
-                <Card key={combo.id} className="border-2 border-gray-200">
+              <CarouselItem key={combo.id}>
+                <Card className="border-2 border-gray-200">
                   <CardHeader className="grow">
                     <CardTitle>{combo.name}</CardTitle>
                     <CardDescription>{combo.description}</CardDescription>
@@ -72,8 +72,8 @@ export function DealsSlider() {
             );
           })}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+        <CarouselPrevious className="absolute top-100 mt-8 left-[30%]" />
+        <CarouselNext className="absolute top-100 mt-8 right-[30%]" />
       </Carousel>
     </>
   );
