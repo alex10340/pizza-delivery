@@ -16,7 +16,7 @@ const Navbar = () => {
           </div>
         </Link>
 
-        <div className="absolute left-1/2 transform -translate-x-1/2">
+        <div className=" hidden sm:block lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2">
           <div className="space-x-2">
             <Link href="/">
               <Button variant={"ghost"}>Home</Button>

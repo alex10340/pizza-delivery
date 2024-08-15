@@ -1,9 +1,20 @@
 "use client";
-
+import { combos } from "../data/db";
+import Image from "next/image";
 import * as React from "react";
 import Autoplay from "embla-carousel-autoplay";
 
-import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "./ui/button";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
 import {
   Carousel,
   CarouselContent,
@@ -20,29 +31,46 @@ export function DealsSlider() {
   return (
     <>
       <h2
-        className="scroll-m-20 text-center pb-2 text-3xl font-semibold tracking-tight text-white underline
+        className="scroll-m-20 text-center pb-4 text-3xl font-semibold tracking-tight text-white underline
        decoration-yellow-400 underline-offset-8 decoration-dashed	"
       >
         Hot Deals
       </h2>
       <Carousel
         plugins={[plugin.current]}
-        className="w-full max-w-xs"
+        className="w-full max-w-[250px] min-[440px]:max-w-xs lg:max-w-[350px]"
         onMouseEnter={plugin.current.stop}
         onMouseLeave={plugin.current.reset}
       >
         <CarouselContent>
-          {Array.from({ length: 5 }).map((_, index) => (
-            <CarouselItem key={index}>
-              <div className="p-1">
-                <Card>
-                  <CardContent className="flex aspect-square items-center justify-center p-6">
-                    <span className="text-4xl font-semibold">{index + 1}</span>
+          {combos.map((combo) => {
+            return (
+              <CarouselItem>
+                <Card key={combo.id} className="border-2 border-gray-200">
+                  <CardHeader className="grow">
+                    <CardTitle>{combo.name}</CardTitle>
+                    <CardDescription>{combo.description}</CardDescription>
+                  </CardHeader>
+
+                  <CardContent>
+                    <div className="relative w-full h-0 pb-[75%]">
+                      <Image
+                        src={`/menu/combos/${combo.image}`}
+                        alt="combo image"
+                        fill
+                        className="object-cover rounded-xl"
+                      />
+                    </div>
                   </CardContent>
+
+                  <CardFooter className="flex justify-between">
+                    <p className="text-lg">${combo.price}</p>
+                    <Button>Add to order</Button>
+                  </CardFooter>
                 </Card>
-              </div>
-            </CarouselItem>
-          ))}
+              </CarouselItem>
+            );
+          })}
         </CarouselContent>
         <CarouselPrevious />
         <CarouselNext />

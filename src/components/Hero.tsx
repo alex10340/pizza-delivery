@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <div className="relative h-[600px] flex items-center justify-center bg-black/60">
+    <div className="relative px-[5vw] xl:px-[14vw] p-24 flex-col min-[900px]:flex-row flex items-center justify-around bg-black/60">
       <Image
         src={backgroundImg}
         alt="pizza image"
@@ -16,8 +16,8 @@ const Hero = () => {
         className="absolute inset-0 z-[-1] object-cover"
       />
 
-      <div className="text-white max-w-[400px]">
-        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+      <div className="mb-12 text-center min-[900px]:text-left text-white max-w-[400px]">
+        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight sm:text-5xl">
           Delicious Pizza,
           <br />
           Just a Click Away!
@@ -34,7 +34,7 @@ const Hero = () => {
           </Button>
         </Link>
       </div>
-      <div className="ml-48">
+      <div className="">
         <DealsSlider />
       </div>
     </div>
