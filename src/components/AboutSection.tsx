@@ -16,7 +16,7 @@ const AboutSection = () => {
       />
 
       <div className="text-white max-w-[400px] text-center">
-        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight md:text-5xl">
           Quick delivery.
           <br />
           <span className="text-yellow-400">Since 2004.</span>

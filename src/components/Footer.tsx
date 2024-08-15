@@ -11,7 +11,7 @@ const Footer = () => {
           <p className="font-bold text-xl">Pizza Delivery</p>
         </div>
 
-        <nav className="mt-6 md:mt-0 text-center flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6">
+        <nav className="mt-6 md:mt-0 text-center flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-6">
           <Link href="/">Home</Link>
           <Link href="/#menu-section">Menu</Link>
           <Link href="/locations">Locations</Link>
