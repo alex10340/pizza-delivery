@@ -1,4 +1,4 @@
-import { beverages, desserts, pizzas } from "../data/db";
+import { beverages, desserts, pizzas } from "@/data/db";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "./ui/button";

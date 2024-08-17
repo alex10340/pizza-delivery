@@ -1,5 +1,5 @@
 "use client";
-import { combos } from "../data/db";
+import { combos } from "@/data/db";
 import Image from "next/image";
 import * as React from "react";
 import Autoplay from "embla-carousel-autoplay";
@@ -32,7 +32,7 @@ export function DealsSlider() {
     <>
       <h2
         className="scroll-m-20 text-center pb-4 text-3xl font-semibold tracking-tight text-white underline
-       decoration-yellow-400 underline-offset-8 decoration-dashed	"
+       decoration-primary underline-offset-8 decoration-dashed"
       >
         Hot Deals
       </h2>
