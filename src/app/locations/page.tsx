@@ -3,10 +3,7 @@ import Image from "next/image";
 export default function LocationsPage() {
   return (
     <div className="max-w-[1000px] mx-auto p-6 my-6">
-      <h1
-        className="underline
-       decoration-primary underline-offset-8 decoration-dashed text-center scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl"
-      >
+      <h1 className="underline decoration-primary underline-offset-8 decoration-dashed text-center scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
         Our Locations
       </h1>
       <h2 className="text-center mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
