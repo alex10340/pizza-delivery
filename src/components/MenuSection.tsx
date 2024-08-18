@@ -25,7 +25,7 @@ const MenuSection = () => {
       >
         Menu
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 p-6 pt-12 mx-auto max-w-[1400px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 p-6 pt-12 mx-auto max-w-[1400px]">
         {pizzas.map((pizza) => {
           const borderColor = pizza.popular
             ? "border-yellow-500"
@@ -87,7 +87,7 @@ const MenuSection = () => {
       >
         Beverages
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 p-6 pt-12 mx-auto max-w-[1400px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 p-6 pt-12 mx-auto max-w-[1400px]">
         {beverages.map((beverage) => {
           return (
             <Card
@@ -126,7 +126,7 @@ const MenuSection = () => {
       >
         Desserts
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 p-6 pt-12 mx-auto max-w-[1400px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 p-6 pt-12 mx-auto max-w-[1400px]">
         {desserts.map((dessert) => {
           return (
             <Card
