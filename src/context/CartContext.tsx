@@ -12,6 +12,7 @@ interface CartContextType {
   removeFromCart: (id: number, type: string) => void;
   increaseQuantity: (id: number, type: string) => void;
   decreaseQuantity: (id: number, type: string) => void;
+  clearCart: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -70,6 +71,10 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
+  const clearCart = () => {
+    setCart([]);
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -78,6 +83,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         removeFromCart,
         increaseQuantity,
         decreaseQuantity,
+        clearCart,
       }}
     >
       {children}
