@@ -1,7 +1,10 @@
+"use client";
+
+import { useCart } from "@/context/CartContext";
 import { beverages, desserts, pizzas } from "@/data/db";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -12,11 +15,13 @@ import {
 } from "@/components/ui/card";
 
 const MenuSection = () => {
+  const { addToCart } = useCart();
+
   return (
     <>
       <h2
         id="menu"
-        className=" scroll-m-[4.4rem] border-b w-[80%] text-3xl font-semibold tracking-tight first:mt-0 text-center p-6 max-w-[1400px] mx-auto"
+        className="scroll-m-[4.4rem] border-b w-[80%] text-3xl font-semibold tracking-tight first:mt-0 text-center p-6 max-w-[1400px] mx-auto"
       >
         Menu
       </h2>
@@ -51,7 +56,7 @@ const MenuSection = () => {
               <CardContent>
                 <div className="relative w-full h-0 pb-[75%]">
                   <Image
-                    src={`/menu/pizzas/${pizza.image}`}
+                    src={pizza.image}
                     alt="pizza image"
                     fill
                     className="object-cover rounded-xl"
@@ -61,7 +66,7 @@ const MenuSection = () => {
 
               <CardFooter className="flex justify-between">
                 <p className="text-lg">${pizza.price}</p>
-                <Button>Add to order</Button>
+                <Button onClick={() => addToCart(pizza)}>Add to order</Button>
               </CardFooter>
 
               {badgeText && (
@@ -94,7 +99,7 @@ const MenuSection = () => {
               <CardContent>
                 <div className="relative w-full h-0 pb-[75%]">
                   <Image
-                    src={`/menu/beverages/${beverage.image}`}
+                    src={beverage.image}
                     alt="beverage image"
                     fill
                     className="object-cover rounded-xl"
@@ -104,7 +109,9 @@ const MenuSection = () => {
 
               <CardFooter className="flex justify-between">
                 <p className="text-lg">${beverage.price}</p>
-                <Button>Add to order</Button>
+                <Button onClick={() => addToCart(beverage)}>
+                  Add to order
+                </Button>
               </CardFooter>
             </Card>
           );
@@ -128,7 +135,7 @@ const MenuSection = () => {
               <CardContent>
                 <div className="relative w-full h-0 pb-[75%]">
                   <Image
-                    src={`/menu/desserts/${dessert.image}`}
+                    src={dessert.image}
                     alt="dessert image"
                     fill
                     className="object-cover object-top rounded-xl"
@@ -138,7 +145,7 @@ const MenuSection = () => {
 
               <CardFooter className="flex justify-between">
                 <p className="text-lg">${dessert.price}</p>
-                <Button>Add to order</Button>
+                <Button onClick={() => addToCart(dessert)}>Add to order</Button>
               </CardFooter>
             </Card>
           );

@@ -24,9 +24,15 @@ export default function OrderPage() {
               <p>{item.description}</p>
               <p>Price: ${item.price}</p>
               <p>Quantity: {item.quantity}</p>
-              <button onClick={() => increaseQuantity(item.id)}>+</button>
-              <button onClick={() => decreaseQuantity(item.id)}>-</button>
-              <button onClick={() => removeFromCart(item.id)}>Remove</button>
+              <button onClick={() => increaseQuantity(item.id, item.type)}>
+                +
+              </button>
+              <button onClick={() => decreaseQuantity(item.id, item.type)}>
+                -
+              </button>
+              <button onClick={() => removeFromCart(item.id, item.type)}>
+                Remove
+              </button>
             </div>
           ))}
           <h2>

@@ -9,9 +9,9 @@ interface CartItem extends Product {
 interface CartContextType {
   cart: CartItem[];
   addToCart: (product: Product) => void;
-  removeFromCart: (id: number) => void;
-  increaseQuantity: (id: number) => void;
-  decreaseQuantity: (id: number) => void;
+  removeFromCart: (id: number, type: string) => void;
+  increaseQuantity: (id: number, type: string) => void;
+  decreaseQuantity: (id: number, type: string) => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -29,10 +29,12 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const addToCart = (product: Product) => {
     setCart((prevCart) => {
-      const existingItem = prevCart.find((item) => item.id === product.id);
+      const existingItem = prevCart.find(
+        (item) => item.id === product.id && item.type === product.type
+      );
       if (existingItem) {
         return prevCart.map((item) =>
-          item.id === product.id
+          item.id === product.id && item.type === product.type
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
@@ -42,22 +44,26 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  const removeFromCart = (id: number) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
+  const removeFromCart = (id: number, type: string) => {
+    setCart((prevCart) =>
+      prevCart.filter((item) => item.id !== id || item.type !== type)
+    );
   };
 
-  const increaseQuantity = (id: number) => {
+  const increaseQuantity = (id: number, type: string) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+        item.id === id && item.type === type
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
       )
     );
   };
 
-  const decreaseQuantity = (id: number) => {
+  const decreaseQuantity = (id: number, type: string) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
-        item.id === id
+        item.id === id && item.type === type
           ? { ...item, quantity: item.quantity > 1 ? item.quantity - 1 : 1 }
           : item
       )

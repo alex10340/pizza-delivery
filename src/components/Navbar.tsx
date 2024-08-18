@@ -33,7 +33,7 @@ const Navbar = () => {
         </div>
         <Link href="/order">
           <Button>
-            <ShoppingBag className="mr-2 h-4 w-4" /> 3 items
+            <ShoppingBag className="mr-2 h-4 w-4" />3 items
           </Button>
         </Link>
       </div>

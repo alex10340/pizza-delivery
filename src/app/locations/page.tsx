@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function locations() {
+export default function LocationsPage() {
   return (
     <div className="max-w-[1000px] mx-auto p-6 my-6">
       <h1
