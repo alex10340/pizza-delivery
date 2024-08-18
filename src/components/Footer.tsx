@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="py-8 border-t border-gray-700">
+    <footer className="py-8 border-t">
       <div className=" max-w-[1400px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
         <div className="flex items-center space-x-2">
           <Image src={logo} width={40} alt="logo" />
@@ -33,7 +33,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="border-t border-gray-700 mt-8 pt-8 text-center">
+      <div className="border-t mt-8 pt-8 text-center">
         <p>
           &copy; {new Date().getFullYear()} Pizza Delivery. All rights reserved.
         </p>
