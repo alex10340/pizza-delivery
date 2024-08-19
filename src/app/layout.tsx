@@ -15,6 +15,7 @@ const bricolage = Bricolage_Grotesque({
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function RootLayout({
   children,
@@ -27,6 +28,7 @@ export default function RootLayout({
         <CartProvider>
           <Navbar />
           <div className="grow">{children}</div>
+          <Toaster />
         </CartProvider>
         <Footer />
       </body>

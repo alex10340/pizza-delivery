@@ -1,4 +1,5 @@
 "use client";
+
 import {
   createContext,
   useContext,
@@ -7,6 +8,9 @@ import {
   ReactNode,
 } from "react";
 import { Product } from "@/data/db";
+import { toast } from "sonner";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 interface CartItem extends Product {
   quantity: number;
@@ -72,6 +76,29 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         return [...prevCart, { ...product, quantity: 1 }];
       }
     });
+
+    // Trigger the Sonner notification
+    toast(
+      <div className="flex items-center space-x-4">
+        <Image
+          src={product.image}
+          alt={product.name}
+          width={50}
+          height={50}
+          className="object-cover rounded-md"
+        />
+        <div>
+          <p className="text-lg font-semibold">{product.name}</p>
+          <p className="text-sm text-gray-500">${product.price}</p>
+        </div>
+        <Button
+          variant="secondary"
+          onClick={() => removeFromCart(product.id, product.type)}
+        >
+          Undo
+        </Button>
+      </div>
+    );
   };
 
   const removeFromCart = (id: number, type: string) => {
