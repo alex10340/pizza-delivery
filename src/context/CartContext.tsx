@@ -1,5 +1,11 @@
 "use client";
-import { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
 import { Product } from "@/data/db";
 
 interface CartItem extends Product {
@@ -13,6 +19,8 @@ interface CartContextType {
   increaseQuantity: (id: number, type: string) => void;
   decreaseQuantity: (id: number, type: string) => void;
   clearCart: () => void;
+  isInitialized: boolean;
+  getTotalItems: () => number; // New function
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -27,6 +35,27 @@ export const useCart = () => {
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedCart = localStorage.getItem("cart");
+      if (storedCart) {
+        setCart(JSON.parse(storedCart));
+      }
+      setIsInitialized(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isInitialized) {
+      try {
+        localStorage.setItem("cart", JSON.stringify(cart));
+      } catch (error) {
+        console.error("Error saving cart to localStorage", error);
+      }
+    }
+  }, [cart, isInitialized]);
 
   const addToCart = (product: Product) => {
     setCart((prevCart) => {
@@ -73,6 +102,11 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const clearCart = () => {
     setCart([]);
+    localStorage.removeItem("cart");
+  };
+
+  const getTotalItems = () => {
+    return cart.reduce((total, item) => total + item.quantity, 0);
   };
 
   return (
@@ -84,6 +118,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         increaseQuantity,
         decreaseQuantity,
         clearCart,
+        isInitialized,
+        getTotalItems, // Provide the function
       }}
     >
       {children}

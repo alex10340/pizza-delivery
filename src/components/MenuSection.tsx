@@ -59,6 +59,7 @@ const MenuSection = () => {
                     src={pizza.image}
                     alt="pizza image"
                     fill
+                    sizes="100%"
                     className="object-cover rounded-xl"
                   />
                 </div>
@@ -105,6 +106,7 @@ const MenuSection = () => {
                     src={beverage.image}
                     alt="beverage image"
                     fill
+                    sizes="100%"
                     className="object-cover rounded-xl"
                   />
                 </div>
@@ -144,6 +146,7 @@ const MenuSection = () => {
                     src={dessert.image}
                     alt="dessert image"
                     fill
+                    sizes="100%"
                     className="object-cover object-top rounded-xl"
                   />
                 </div>

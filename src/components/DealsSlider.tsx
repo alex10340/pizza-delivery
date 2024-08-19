@@ -57,6 +57,7 @@ export function DealsSlider() {
                       src={combo.image}
                       alt="combo image"
                       fill
+                      sizes="100%"
                       className="object-cover rounded-xl"
                     />
                   </div>

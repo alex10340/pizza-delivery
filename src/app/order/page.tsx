@@ -4,11 +4,30 @@ import { ShoppingBag } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Card, CardTitle, CardHeader, CardFooter } from "@/components/ui/card";
+import {
+  Card,
+  CardTitle,
+  CardHeader,
+  CardFooter,
+  CardContent,
+} from "@/components/ui/card";
+
+import { Pizza } from "lucide-react";
+import { CupSoda } from "lucide-react";
+import { CakeSlice } from "lucide-react";
 
 export default function OrderPage() {
-  const { cart, increaseQuantity, decreaseQuantity, removeFromCart } =
-    useCart();
+  const {
+    cart,
+    increaseQuantity,
+    decreaseQuantity,
+    removeFromCart,
+    isInitialized,
+  } = useCart();
+
+  if (!isInitialized) {
+    return <div>Loading...</div>; // make a skeleton, see notes
+  }
 
   return (
     <div className="max-w-[1200px] mx-auto p-6 my-6">
@@ -40,86 +59,109 @@ export default function OrderPage() {
                 Order Summary
               </CardTitle>
             </CardHeader>
-            {cart.map((item) => (
-              <div
-                key={item.id}
-                className="flex flex-col sm:flex-row items-center justify-between p-4 border rounded-lg shadow-sm bg-white"
-              >
-                <div className="flex items-center space-x-4 w-full sm:w-auto">
-                  <div className="relative w-32 h-32 sm:w-20 sm:h-20 flex-shrink-0">
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      fill
-                      className="object-cover rounded-md"
-                    />
+            <CardContent className="space-y-4">
+              {cart.map((item) => (
+                <div
+                  key={item.id + item.type}
+                  className="flex flex-col sm:flex-row items-center justify-between p-4 border rounded-lg shadow-sm bg-gray-50"
+                >
+                  <div className="flex items-center space-x-4 w-full sm:w-auto">
+                    <div className="relative w-32 h-32 sm:w-20 sm:h-20 flex-shrink-0">
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        fill
+                        sizes="100%"
+                        className="object-cover rounded-md"
+                      />
+                    </div>
+                    <div className="flex-1 text-center sm:text-left">
+                      <h2 className="text-xl font-semibold">{item.name}</h2>
+                      <p className="font-medium hidden md:block text-gray-600">
+                        {item.description}
+                      </p>
+                      <p className="font-medium text-gray-600">
+                        Price: ${item.price}
+                      </p>
+                    </div>
                   </div>
-                  <div className="flex-1 text-center sm:text-left">
-                    <h2 className="text-xl font-semibold">{item.name}</h2>
-                    <p className="font-medium hidden md:block text-gray-600">
-                      {item.description}
-                    </p>
-                    <p className="font-medium text-gray-600">
-                      Price: ${item.price}
-                    </p>
+                  <div className="flex items-center space-x-2 mt-4 sm:mt-0">
+                    {item.quantity === 1 ? (
+                      <Button
+                        onClick={() => decreaseQuantity(item.id, item.type)}
+                        variant="secondary"
+                        className="w-8 h-8 p-0"
+                      >
+                        -
+                      </Button>
+                    ) : (
+                      <Button
+                        onClick={() => decreaseQuantity(item.id, item.type)}
+                        variant="outline"
+                        className="w-8 h-8 p-0"
+                      >
+                        -
+                      </Button>
+                    )}
+
+                    <span className="font-semibold">{item.quantity}</span>
+                    <Button
+                      onClick={() => increaseQuantity(item.id, item.type)}
+                      variant="outline"
+                      className="w-8 h-8 p-0"
+                    >
+                      +
+                    </Button>
+                    <Button
+                      onClick={() => removeFromCart(item.id, item.type)}
+                      variant="destructive"
+                      className="ml-2 h-8"
+                    >
+                      Remove
+                    </Button>
                   </div>
                 </div>
-                <div className="flex items-center space-x-2 mt-4 sm:mt-0">
-                  <Button
-                    onClick={() => decreaseQuantity(item.id, item.type)}
-                    variant="secondary"
-                    className="w-8 h-8 p-0"
-                  >
-                    -
-                  </Button>
-                  <span className="font-semibold">{item.quantity}</span>
-                  <Button
-                    onClick={() => increaseQuantity(item.id, item.type)}
-                    variant="outline"
-                    className="w-8 h-8 p-0"
-                  >
-                    +
-                  </Button>
-                  <Button
-                    onClick={() => removeFromCart(item.id, item.type)}
-                    variant="destructive"
-                    className="ml-2"
-                  >
-                    Remove
-                  </Button>
-                </div>
+              ))}
+              <div className="flex justify-between font-bold text-lg border-t pt-4 mt-4">
+                <span>Total:</span>
+                <span>
+                  $
+                  {cart
+                    .reduce(
+                      (total, item) => total + item.price * item.quantity,
+                      0
+                    )
+                    .toFixed(2)}
+                </span>
               </div>
-            ))}
+            </CardContent>
           </Card>
 
-          <div className="flex flex-col-reverse sm:flex-row justify-between items-start sm:items-center gap-8">
+          <div className="flex flex-col sm:flex-row justify-between gap-8">
             <div className="w-full sm:w-auto">
               <h3 className="text-xl font-semibold mb-4 text-center sm:text-left">
                 Want to add more items?
               </h3>
               <div className="flex justify-center sm:justify-start gap-4 flex-wrap">
                 <Link href="/#menu">
-                  <Button variant="outline">+ Add Pizzas</Button>
+                  <Button variant={"outline"}>
+                    + <Pizza className="w-5 mr-1.5 ml-0.5" /> Add Pizzas
+                  </Button>
                 </Link>
                 <Link href="/#beverages">
-                  <Button variant="outline">+ Add Beverages</Button>
+                  <Button variant={"outline"}>
+                    + <CupSoda className="w-5 mr-1.5 ml-0.5" /> Add Beverages
+                  </Button>
                 </Link>
                 <Link href="/#desserts">
-                  <Button variant="outline">+ Add Desserts</Button>
+                  <Button variant={"outline"}>
+                    + <CakeSlice className="w-5 mr-1.5 ml-0.5" /> Add Desserts
+                  </Button>
                 </Link>
               </div>
             </div>
 
             <div className="w-full sm:w-auto text-center sm:text-right">
-              <h2 className="text-xl font-bold mb-4">
-                Total: $
-                {cart
-                  .reduce(
-                    (total, item) => total + item.price * item.quantity,
-                    0
-                  )
-                  .toFixed(2)}
-              </h2>
               <Link href="/checkout">
                 <Button className="w-full sm:w-auto bg-green-500 text-white hover:bg-green-600">
                   Proceed to Checkout

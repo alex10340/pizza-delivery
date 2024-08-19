@@ -1,11 +1,15 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { ShoppingBag } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 import Image from "next/image";
 import Link from "next/link";
+import { useCart } from "@/context/CartContext";
 
 const Navbar = () => {
+  const { getTotalItems } = useCart();
+
   return (
     <div className="shadow-lg sticky top-0 bg-white z-50 text-black">
       <div className="relative flex items-center justify-between h-[4.5rem] px-6 max-w-[1400px] mx-auto">
@@ -33,7 +37,9 @@ const Navbar = () => {
         </div>
         <Link href="/order">
           <Button>
-            <ShoppingBag className="mr-2 h-4 w-4" />3 items
+            <ShoppingBag className="mr-2 h-4 w-4" />
+            {getTotalItems()}
+            {getTotalItems() == 1 ? " item" : " items"}
           </Button>
         </Link>
       </div>

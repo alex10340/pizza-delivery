@@ -55,6 +55,7 @@ export default function CheckoutPage() {
                             src={item.image}
                             alt={item.name}
                             fill
+                            sizes="100%"
                             className="object-cover rounded-md"
                           />
                         </div>

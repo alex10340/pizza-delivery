@@ -24,8 +24,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${bricolage.className} flex flex-col min-h-screen`}>
-        <Navbar />
         <CartProvider>
+          <Navbar />
           <div className="grow">{children}</div>
         </CartProvider>
         <Footer />
