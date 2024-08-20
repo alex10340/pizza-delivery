@@ -3,8 +3,15 @@
 import * as React from "react";
 import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
-import { pizzas, beverages, desserts, combos } from "@/data/db";
-import { Combo } from "@/data/db";
+import {
+  pizzas,
+  beverages,
+  desserts,
+  combos,
+  SelectedItems,
+  Combo,
+} from "@/data/db";
+
 import { Button } from "./ui/button";
 import {
   Card,
@@ -42,12 +49,6 @@ import {
 } from "@/components/ui/select";
 
 import { useCart } from "@/context/CartContext";
-
-export interface SelectedItems {
-  pizzas: string[];
-  desserts: string[];
-  beverages: string[];
-}
 
 export function DealsSlider() {
   const plugin = React.useRef(

@@ -15,6 +15,12 @@ export interface Combo extends Product {
   dessertQty: number;
 }
 
+export interface SelectedItems {
+  pizzas: string[];
+  desserts: string[];
+  beverages: string[];
+}
+
 export const pizzas: Product[] = [
   {
     id: 1,

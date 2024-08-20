@@ -8,8 +8,7 @@ import {
   ReactNode,
 } from "react";
 
-import { SelectedItems } from "@/components/DealsSlider";
-import { Product } from "@/data/db";
+import { Product, SelectedItems } from "@/data/db";
 import { toast } from "sonner";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
