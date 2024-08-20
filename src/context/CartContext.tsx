@@ -21,9 +21,21 @@ interface CartItem extends Product {
 interface CartContextType {
   cart: CartItem[];
   addToCart: (product: Product, selectedItems: SelectedItems) => void;
-  removeFromCart: (id: number, type: string) => void;
-  increaseQuantity: (id: number, type: string) => void;
-  decreaseQuantity: (id: number, type: string) => void;
+  removeFromCart: (
+    id: number,
+    type: string,
+    selectedItemsString: string | undefined
+  ) => void;
+  increaseQuantity: (
+    id: number,
+    type: string,
+    selectedItemsString: string | undefined
+  ) => void;
+  decreaseQuantity: (
+    id: number,
+    type: string,
+    selectedItemsString: string | undefined
+  ) => void;
   clearCart: () => void;
   isInitialized: boolean;
   getTotalItems: () => number;
@@ -136,9 +148,13 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
               className="font-bold"
               onClick={() => {
                 if (updatedItem && updatedItem.quantity === 1) {
-                  removeFromCart(product.id, product.type);
+                  removeFromCart(product.id, product.type, selectedItemsString);
                 } else {
-                  decreaseQuantity(product.id, product.type);
+                  decreaseQuantity(
+                    product.id,
+                    product.type,
+                    selectedItemsString
+                  );
                 }
                 toast.dismiss(t);
               }}
@@ -154,26 +170,47 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
-  const removeFromCart = (id: number, type: string) => {
+  const removeFromCart = (
+    id: number,
+    type: string,
+    selectedItemsString: string | undefined
+  ) => {
     setCart((prevCart) =>
-      prevCart.filter((item) => item.id !== id || item.type !== type)
+      prevCart.filter(
+        (item) =>
+          item.id !== id ||
+          item.type !== type ||
+          item.selectedItemsString !== selectedItemsString
+      )
     );
   };
 
-  const increaseQuantity = (id: number, type: string) => {
+  const increaseQuantity = (
+    id: number,
+    type: string,
+    selectedItemsString: string | undefined
+  ) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
-        item.id === id && item.type === type
+        item.id === id &&
+        item.type === type &&
+        item.selectedItemsString === selectedItemsString
           ? { ...item, quantity: item.quantity + 1 }
           : item
       )
     );
   };
 
-  const decreaseQuantity = (id: number, type: string) => {
+  const decreaseQuantity = (
+    id: number,
+    type: string,
+    selectedItemsString: string | undefined
+  ) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
-        item.id === id && item.type === type
+        item.id === id &&
+        item.type === type &&
+        item.selectedItemsString === selectedItemsString
           ? { ...item, quantity: item.quantity > 1 ? item.quantity - 1 : 1 }
           : item
       )

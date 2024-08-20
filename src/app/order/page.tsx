@@ -144,7 +144,13 @@ export default function OrderPage() {
                 <div className="flex items-center space-x-2 mt-4 sm:mt-0">
                   {item.quantity === 1 ? (
                     <Button
-                      onClick={() => decreaseQuantity(item.id, item.type)}
+                      onClick={() =>
+                        decreaseQuantity(
+                          item.id,
+                          item.type,
+                          item.selectedItemsString
+                        )
+                      }
                       variant="secondary"
                       className="w-8 h-8 p-0"
                     >
@@ -152,7 +158,13 @@ export default function OrderPage() {
                     </Button>
                   ) : (
                     <Button
-                      onClick={() => decreaseQuantity(item.id, item.type)}
+                      onClick={() =>
+                        decreaseQuantity(
+                          item.id,
+                          item.type,
+                          item.selectedItemsString
+                        )
+                      }
                       variant="outline"
                       className="w-8 h-8 p-0"
                     >
@@ -161,7 +173,13 @@ export default function OrderPage() {
                   )}
                   <span className="font-semibold">{item.quantity}</span>
                   <Button
-                    onClick={() => increaseQuantity(item.id, item.type)}
+                    onClick={() =>
+                      increaseQuantity(
+                        item.id,
+                        item.type,
+                        item.selectedItemsString
+                      )
+                    }
                     variant="outline"
                     className="w-8 h-8 p-0"
                   >
@@ -197,7 +215,13 @@ export default function OrderPage() {
                   )}
 
                   <Button
-                    onClick={() => removeFromCart(item.id, item.type)}
+                    onClick={() =>
+                      removeFromCart(
+                        item.id,
+                        item.type,
+                        item.selectedItemsString
+                      )
+                    }
                     variant="destructive"
                     className="ml-2 h-8"
                   >
