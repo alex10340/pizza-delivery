@@ -131,13 +131,23 @@ export default function OrderPage() {
                   </div>
                 </div>
                 <div className="flex items-center space-x-2 mt-4 sm:mt-0">
-                  <Button
-                    onClick={() => decreaseQuantity(item.id, item.type)}
-                    variant="outline"
-                    className="w-8 h-8 p-0"
-                  >
-                    -
-                  </Button>
+                  {item.quantity === 1 ? (
+                    <Button
+                      onClick={() => decreaseQuantity(item.id, item.type)}
+                      variant="secondary"
+                      className="w-8 h-8 p-0"
+                    >
+                      -
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={() => decreaseQuantity(item.id, item.type)}
+                      variant="outline"
+                      className="w-8 h-8 p-0"
+                    >
+                      -
+                    </Button>
+                  )}
                   <span className="font-semibold">{item.quantity}</span>
                   <Button
                     onClick={() => increaseQuantity(item.id, item.type)}
