@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <div className="relative flex items-center justify-around min-[900px]:flex-row flex-col px-2 md:px-16 lg:px-20 p-16 sm:p-24 bg-black/60">
+    <div className="relative flex items-center justify-around min-[900px]:flex-row max-[900px]:mb-12 flex-col px-2 md:px-16 lg:px-20 p-16 sm:p-24 bg-black/60">
       <Image
         src={backgroundImg}
         alt="pizza image"

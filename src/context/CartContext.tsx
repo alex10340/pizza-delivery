@@ -62,42 +62,73 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   }, [cart, isInitialized]);
 
   const addToCart = (product: Product) => {
+    let updatedCart: CartItem[] = [];
+
     setCart((prevCart) => {
       const existingItem = prevCart.find(
         (item) => item.id === product.id && item.type === product.type
       );
       if (existingItem) {
-        return prevCart.map((item) =>
+        updatedCart = prevCart.map((item) =>
           item.id === product.id && item.type === product.type
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       } else {
-        return [...prevCart, { ...product, quantity: 1 }];
+        updatedCart = [...prevCart, { ...product, quantity: 1 }];
       }
+
+      return updatedCart;
     });
 
-    // Trigger the Sonner notification
-    toast(
-      <div className="flex items-center space-x-4">
-        <Image
-          src={product.image}
-          alt={product.name}
-          width={50}
-          height={50}
-          className="object-cover rounded-md"
-        />
-        <div>
-          <p className="text-lg font-semibold">{product.name}</p>
-          <p className="text-sm text-gray-500">${product.price}</p>
-        </div>
-        <Button
-          variant="secondary"
-          onClick={() => removeFromCart(product.id, product.type)}
-        >
-          Undo
-        </Button>
-      </div>
+    toast.custom(
+      (t) => {
+        const updatedItem = updatedCart.find(
+          (item) => item.id === product.id && item.type === product.type
+        );
+
+        return (
+          <div className="flex w-full justify-center bg-transparent items-center p-4 space-x-4 rounded-xl shadow-lg border border-gray-200">
+            <div className="relative w-16 h-16">
+              <Image
+                src={product.image}
+                alt={product.name}
+                fill
+                sizes="100%"
+                className="object-cover rounded-md"
+              />
+            </div>
+            <div className="flex-1 text-left">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Added to cart
+              </p>
+              <p className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                {product.name}
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                ${product.price.toFixed(2)}
+              </p>
+            </div>
+            <Button
+              variant="destructive"
+              className="font-bold"
+              onClick={() => {
+                if (updatedItem && updatedItem.quantity === 1) {
+                  removeFromCart(product.id, product.type);
+                } else {
+                  decreaseQuantity(product.id, product.type);
+                }
+                toast.dismiss(t);
+              }}
+            >
+              Remove
+            </Button>
+          </div>
+        );
+      },
+      {
+        duration: 5000,
+      }
     );
   };
 
