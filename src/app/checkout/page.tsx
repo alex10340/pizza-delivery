@@ -213,7 +213,7 @@ export default function CheckoutPage() {
                   className="flex items-center justify-between p-4 border rounded-lg bg-gray-50"
                 >
                   <div className="flex items-center space-x-4">
-                    <div className="relative w-20 h-20 sm:w-16 sm:h-16 xs:w-12 xs:h-12 flex-shrink-0">
+                    <div className="relative w-20 h-20 sm:w-16 sm:h-16 flex-shrink-0">
                       <Image
                         src={item.image}
                         alt={item.name}
