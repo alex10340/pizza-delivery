@@ -64,7 +64,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   }, [cart, isInitialized]);
 
   const addToCart = (product: Product, selectedItems?: SelectedItems) => {
-    let selectedItemsString = "";
+    let selectedItemsString = undefined;
     if (selectedItems !== undefined) {
       selectedItemsString = [
         ...selectedItems.pizzas,
@@ -77,7 +77,10 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
     setCart((prevCart) => {
       const existingItem = prevCart.find(
-        (item) => item.id === product.id && item.type === product.type
+        (item) =>
+          item.id === product.id &&
+          item.type === product.type &&
+          item.selectedItemsString === selectedItemsString
       );
       if (existingItem) {
         updatedCart = prevCart.map((item) =>
