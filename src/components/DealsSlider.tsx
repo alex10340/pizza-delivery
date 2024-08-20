@@ -94,9 +94,7 @@ export function DealsSlider() {
   const handleAddToCart = (combo: Combo) => {
     if (!isAddToOrderDisabled(combo)) {
       addToCart(combo, selectedItems);
-      setTimeout(() => {
-        setSelectedItems({ pizzas: [], desserts: [], beverages: [] });
-      }, 200);
+      setSelectedItems({ pizzas: [], desserts: [], beverages: [] });
     }
   };
 

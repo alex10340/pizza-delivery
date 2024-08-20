@@ -63,7 +63,16 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [cart, isInitialized]);
 
-  const addToCart = (product: Product, selectedItems: SelectedItems) => {
+  const addToCart = (product: Product, selectedItems?: SelectedItems) => {
+    let selectedItemsString = "";
+    if (selectedItems !== undefined) {
+      selectedItemsString = [
+        ...selectedItems.pizzas,
+        ...selectedItems.desserts,
+        ...selectedItems.beverages,
+      ].join(", ");
+    }
+
     let updatedCart: CartItem[] = [];
 
     setCart((prevCart) => {
@@ -77,7 +86,10 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
             : item
         );
       } else {
-        updatedCart = [...prevCart, { ...product, quantity: 1 }];
+        updatedCart = [
+          ...prevCart,
+          { ...product, quantity: 1, selectedItemsString },
+        ];
       }
 
       return updatedCart;
@@ -107,6 +119,11 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
               <p className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                 {product.name}
               </p>
+              {selectedItemsString && (
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {selectedItemsString}
+                </p>
+              )}
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 ${product.price.toFixed(2)}
               </p>

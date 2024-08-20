@@ -7,6 +7,17 @@ import { Button } from "@/components/ui/button";
 import { Card, CardTitle, CardHeader, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
 export default function OrderPage() {
   const {
     cart,
@@ -121,9 +132,8 @@ export default function OrderPage() {
                     />
                   </div>
                   <div className="flex-1 text-center sm:text-left">
-                    <h2 className="text-xl font-semibold ">{item.name}</h2>
-
-                    <p className="font-medium pr-4 hidden md:block text-gray-600">
+                    <h2 className="text-xl font-semibold">{item.name}</h2>
+                    <p className="text-sm font-medium pr-4 hidden min-[900px]:block text-gray-600">
                       {item.description}
                     </p>
                     <p className="font-medium text-gray-600">
@@ -157,6 +167,35 @@ export default function OrderPage() {
                   >
                     +
                   </Button>
+                  {item.selectedItemsString && (
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button variant="outline" className="ml-2 h-8">
+                          Details
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="sm:max-w-md">
+                        <DialogHeader className="items-center">
+                          <div className="relative w-32 h-32 sm:w-20 sm:h-20 flex-shrink-0">
+                            <Image
+                              src={item.image}
+                              alt={item.name}
+                              fill
+                              sizes="100%"
+                              className="object-cover rounded-md"
+                            />
+                          </div>
+                          <DialogTitle className="text-2xl">
+                            {item.name}
+                          </DialogTitle>
+                          <DialogDescription className="">
+                            Selected Items: {item.selectedItemsString}
+                          </DialogDescription>
+                        </DialogHeader>
+                      </DialogContent>
+                    </Dialog>
+                  )}
+
                   <Button
                     onClick={() => removeFromCart(item.id, item.type)}
                     variant="destructive"
