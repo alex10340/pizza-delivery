@@ -7,6 +7,8 @@ import {
   useEffect,
   ReactNode,
 } from "react";
+
+import { SelectedItems } from "@/components/DealsSlider";
 import { Product } from "@/data/db";
 import { toast } from "sonner";
 import Image from "next/image";
@@ -14,11 +16,12 @@ import { Button } from "@/components/ui/button";
 
 interface CartItem extends Product {
   quantity: number;
+  selectedItemsString?: string;
 }
 
 interface CartContextType {
   cart: CartItem[];
-  addToCart: (product: Product) => void;
+  addToCart: (product: Product, selectedItems: SelectedItems) => void;
   removeFromCart: (id: number, type: string) => void;
   increaseQuantity: (id: number, type: string) => void;
   decreaseQuantity: (id: number, type: string) => void;
@@ -61,7 +64,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [cart, isInitialized]);
 
-  const addToCart = (product: Product) => {
+  const addToCart = (product: Product, selectedItems: SelectedItems) => {
     let updatedCart: CartItem[] = [];
 
     setCart((prevCart) => {

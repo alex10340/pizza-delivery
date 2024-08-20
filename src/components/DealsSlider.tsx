@@ -1,10 +1,10 @@
 "use client";
 
+import * as React from "react";
+import Image from "next/image";
+import Autoplay from "embla-carousel-autoplay";
 import { pizzas, beverages, desserts, combos } from "@/data/db";
 import { Combo } from "@/data/db";
-import Image from "next/image";
-import * as React from "react";
-import Autoplay from "embla-carousel-autoplay";
 import { Button } from "./ui/button";
 import {
   Card,
@@ -43,7 +43,7 @@ import {
 
 import { useCart } from "@/context/CartContext";
 
-interface SelectedItems {
+export interface SelectedItems {
   pizzas: string[];
   desserts: string[];
   beverages: string[];
@@ -69,7 +69,11 @@ export function DealsSlider() {
     setSelectedItems((prev) => {
       const updatedSelections = [...prev[category]];
       updatedSelections[index] = value;
-      return { ...prev, [category]: updatedSelections };
+
+      const newSelections = { ...prev, [category]: updatedSelections };
+      console.log(newSelections);
+
+      return newSelections;
     });
   };
 
@@ -84,6 +88,15 @@ export function DealsSlider() {
       selectedItems.desserts.length < requiredSelections.desserts ||
       selectedItems.beverages.length < requiredSelections.beverages
     );
+  };
+
+  const handleAddToCart = (combo: Combo) => {
+    if (!isAddToOrderDisabled(combo)) {
+      addToCart(combo, selectedItems);
+      setTimeout(() => {
+        setSelectedItems({ pizzas: [], desserts: [], beverages: [] });
+      }, 200);
+    }
   };
 
   return (
@@ -165,7 +178,6 @@ export function DealsSlider() {
                         </div>
 
                         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                          {/* Select Pizzas */}
                           {[...Array(combo.pizzaQty)].map((_, index) => (
                             <div
                               key={`pizza-${index}`}
@@ -196,7 +208,6 @@ export function DealsSlider() {
                             </div>
                           ))}
 
-                          {/* Select Desserts */}
                           {[...Array(combo.dessertQty)].map((_, index) => (
                             <div
                               key={`dessert-${index}`}
@@ -227,7 +238,6 @@ export function DealsSlider() {
                             </div>
                           ))}
 
-                          {/* Select Beverages */}
                           {[...Array(combo.beverageQty)].map((_, index) => (
                             <div
                               key={`beverage-${index}`}
@@ -262,11 +272,7 @@ export function DealsSlider() {
                           <DialogClose asChild>
                             <Button
                               className="w-full"
-                              onClick={() => {
-                                if (!isAddToOrderDisabled(combo)) {
-                                  addToCart(combo);
-                                }
-                              }}
+                              onClick={() => handleAddToCart(combo)}
                               disabled={isAddToOrderDisabled(combo)}
                             >
                               {isAddToOrderDisabled(combo)
