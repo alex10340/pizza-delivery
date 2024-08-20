@@ -14,9 +14,6 @@ import { Button } from "@/components/ui/button";
 
 interface CartItem extends Product {
   quantity: number;
-  pizzaQty?: number;
-  beverageQty?: number;
-  dessertQty?: number;
 }
 
 interface CartContextType {

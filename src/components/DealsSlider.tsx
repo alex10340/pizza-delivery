@@ -43,7 +43,6 @@ import {
 
 import { useCart } from "@/context/CartContext";
 
-// Type for the state that keeps track of selected items
 interface SelectedItems {
   pizzas: string[];
   desserts: string[];
