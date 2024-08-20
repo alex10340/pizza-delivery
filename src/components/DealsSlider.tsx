@@ -1,6 +1,7 @@
 "use client";
 
 import { pizzas, beverages, desserts, combos } from "@/data/db";
+import { Combo } from "@/data/db";
 import Image from "next/image";
 import * as React from "react";
 import Autoplay from "embla-carousel-autoplay";
@@ -42,11 +43,49 @@ import {
 
 import { useCart } from "@/context/CartContext";
 
+// Type for the state that keeps track of selected items
+interface SelectedItems {
+  pizzas: string[];
+  desserts: string[];
+  beverages: string[];
+}
+
 export function DealsSlider() {
   const plugin = React.useRef(
     Autoplay({ delay: 2000, stopOnInteraction: true })
   );
   const { addToCart } = useCart();
+
+  const [selectedItems, setSelectedItems] = React.useState<SelectedItems>({
+    pizzas: [],
+    desserts: [],
+    beverages: [],
+  });
+
+  const handleSelectChange = (
+    category: "pizzas" | "desserts" | "beverages",
+    index: number,
+    value: string
+  ) => {
+    setSelectedItems((prev) => {
+      const updatedSelections = [...prev[category]];
+      updatedSelections[index] = value;
+      return { ...prev, [category]: updatedSelections };
+    });
+  };
+
+  const isAddToOrderDisabled = (combo: Combo) => {
+    const requiredSelections = {
+      pizzas: combo.pizzaQty,
+      desserts: combo.dessertQty,
+      beverages: combo.beverageQty,
+    };
+    return (
+      selectedItems.pizzas.length < requiredSelections.pizzas ||
+      selectedItems.desserts.length < requiredSelections.desserts ||
+      selectedItems.beverages.length < requiredSelections.beverages
+    );
+  };
 
   return (
     <>
@@ -126,7 +165,8 @@ export function DealsSlider() {
                           </div>
                         </div>
 
-                        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 ">
+                        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                          {/* Select Pizzas */}
                           {[...Array(combo.pizzaQty)].map((_, index) => (
                             <div
                               key={`pizza-${index}`}
@@ -135,7 +175,11 @@ export function DealsSlider() {
                               <p className="text-lg font-semibold leading-none tracking-tight">
                                 Select Pizza {index + 1}
                               </p>
-                              <Select>
+                              <Select
+                                onValueChange={(value) =>
+                                  handleSelectChange("pizzas", index, value)
+                                }
+                              >
                                 <SelectTrigger className="w-full">
                                   <SelectValue placeholder="Select Pizza" />
                                 </SelectTrigger>
@@ -153,6 +197,7 @@ export function DealsSlider() {
                             </div>
                           ))}
 
+                          {/* Select Desserts */}
                           {[...Array(combo.dessertQty)].map((_, index) => (
                             <div
                               key={`dessert-${index}`}
@@ -161,7 +206,11 @@ export function DealsSlider() {
                               <p className="text-lg font-semibold leading-none tracking-tight">
                                 Select Dessert {index + 1}
                               </p>
-                              <Select>
+                              <Select
+                                onValueChange={(value) =>
+                                  handleSelectChange("desserts", index, value)
+                                }
+                              >
                                 <SelectTrigger className="w-full">
                                   <SelectValue placeholder="Select Dessert" />
                                 </SelectTrigger>
@@ -179,6 +228,7 @@ export function DealsSlider() {
                             </div>
                           ))}
 
+                          {/* Select Beverages */}
                           {[...Array(combo.beverageQty)].map((_, index) => (
                             <div
                               key={`beverage-${index}`}
@@ -187,7 +237,11 @@ export function DealsSlider() {
                               <p className="text-lg font-semibold leading-none tracking-tight">
                                 Select Beverage {index + 1}
                               </p>
-                              <Select>
+                              <Select
+                                onValueChange={(value) =>
+                                  handleSelectChange("beverages", index, value)
+                                }
+                              >
                                 <SelectTrigger className="w-full">
                                   <SelectValue placeholder="Select Beverage" />
                                 </SelectTrigger>
@@ -205,13 +259,20 @@ export function DealsSlider() {
                             </div>
                           ))}
                         </div>
-                        <div className="flex justify-center">
+                        <div className="flex justify-center mt-4">
                           <DialogClose asChild>
                             <Button
                               className="w-full"
-                              onClick={() => addToCart(combo)}
+                              onClick={() => {
+                                if (!isAddToOrderDisabled(combo)) {
+                                  addToCart(combo);
+                                }
+                              }}
+                              disabled={isAddToOrderDisabled(combo)}
                             >
-                              Add to order
+                              {isAddToOrderDisabled(combo)
+                                ? "Select all items"
+                                : "Add to order"}
                             </Button>
                           </DialogClose>
                         </div>

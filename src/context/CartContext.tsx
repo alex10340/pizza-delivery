@@ -14,6 +14,9 @@ import { Button } from "@/components/ui/button";
 
 interface CartItem extends Product {
   quantity: number;
+  pizzaQty?: number;
+  beverageQty?: number;
+  dessertQty?: number;
 }
 
 interface CartContextType {
@@ -100,7 +103,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
             </div>
             <div className="flex-1 text-left">
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Added to cart
+                Added to cart!
               </p>
               <p className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                 {product.name}

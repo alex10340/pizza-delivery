@@ -9,6 +9,12 @@ export interface Product {
   type: "pizza" | "beverage" | "dessert" | "combo";
 }
 
+export interface Combo extends Product {
+  pizzaQty: number;
+  beverageQty: number;
+  dessertQty: number;
+}
+
 export const pizzas: Product[] = [
   {
     id: 1,
@@ -203,15 +209,18 @@ export const desserts: Product[] = [
   },
 ];
 
-export const combos: Product[] = [
+export const combos: Combo[] = [
   {
     id: 1,
-    name: "2 Pizzas & Dessert",
+    name: "2 Pizzas & Desserts",
     description:
       "Enjoy a fantastic combo with two delicious pizzas and two mouthwatering desserts, all for one great price.",
     price: 29.99,
     image: "/menu/combos/2_pizzas_dessert.png",
     type: "combo",
+    pizzaQty: 2,
+    dessertQty: 2,
+    beverageQty: 0,
   },
   {
     id: 2,
@@ -221,6 +230,9 @@ export const combos: Product[] = [
     price: 32.99,
     image: "/menu/combos/3_pizza_offer.png",
     type: "combo",
+    pizzaQty: 3,
+    dessertQty: 0,
+    beverageQty: 0,
   },
   {
     id: 3,
@@ -230,5 +242,8 @@ export const combos: Product[] = [
     price: 12.99,
     image: "/menu/combos/pizza_beverage.png",
     type: "combo",
+    pizzaQty: 1,
+    dessertQty: 0,
+    beverageQty: 1,
   },
 ];
