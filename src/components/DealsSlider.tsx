@@ -1,6 +1,6 @@
 "use client";
 
-import { combos } from "@/data/db";
+import { pizzas, beverages, desserts, combos } from "@/data/db";
 import Image from "next/image";
 import * as React from "react";
 import Autoplay from "embla-carousel-autoplay";
@@ -13,6 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
 import {
   Carousel,
   CarouselContent,
@@ -20,6 +21,24 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
 import { useCart } from "@/context/CartContext";
 
 export function DealsSlider() {
@@ -65,7 +84,120 @@ export function DealsSlider() {
 
                 <CardFooter className="flex justify-between">
                   <p className="text-lg">${combo.price}</p>
-                  <Button onClick={() => addToCart(combo)}>Add to order</Button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button>Select Items</Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogTitle className="text-2xl">
+                        Select Items
+                      </DialogTitle>
+                      <DialogDescription>
+                        Select items for your combo!
+                      </DialogDescription>
+
+                      <div className="text-black space-y-6">
+                        <div className="flex flex-col sm:flex-row items-center justify-between p-4 border rounded-lg shadow-sm bg-gray-50">
+                          <div className="flex items-center space-x-4 w-full sm:w-auto">
+                            <div className="relative w-32 h-32 sm:w-20 sm:h-20 flex-shrink-0">
+                              <Image
+                                src={combo.image}
+                                alt={combo.name}
+                                fill
+                                sizes="100%"
+                                className="object-cover rounded-md"
+                              />
+                            </div>
+                            <div className="flex-1 text-center sm:text-left">
+                              <h2 className="text-xl font-semibold ">
+                                {combo.name}
+                              </h2>
+
+                              <p className="font-medium hidden md:block text-gray-600">
+                                {combo.description}
+                              </p>
+                              <p className="font-medium text-gray-600">
+                                Price: ${combo.price}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="flex flex-wrap justify-between gap-4">
+                          <div className="flex gap-4 flex-wrap w-full sm:w-[300px]">
+                            <p className="text-lg font-semibold leading-none tracking-tight">
+                              Select Pizzas
+                            </p>
+                            <Select>
+                              <SelectTrigger className="w-full">
+                                <SelectValue placeholder="Select Pizza" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                {pizzas.map((pizza) => (
+                                  <SelectItem
+                                    key={pizza.id}
+                                    value={`${pizza.name}`}
+                                  >
+                                    {pizza.name}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                            <Select>
+                              <SelectTrigger className="w-full">
+                                <SelectValue placeholder="Select Pizza" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                {pizzas.map((pizza) => (
+                                  <SelectItem
+                                    key={pizza.id}
+                                    value={`${pizza.name}`}
+                                  >
+                                    {pizza.name}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          <div className="flex gap-4 flex-wrap w-full sm:w-[300px]">
+                            <p className="text-lg font-semibold leading-none tracking-tight">
+                              Select Pizzas
+                            </p>
+                            <Select>
+                              <SelectTrigger className="w-full">
+                                <SelectValue placeholder="Select Pizza" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                {pizzas.map((pizza) => (
+                                  <SelectItem
+                                    key={pizza.id}
+                                    value={`${pizza.name}`}
+                                  >
+                                    {pizza.name}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                            <Select>
+                              <SelectTrigger className="w-full">
+                                <SelectValue placeholder="Select Pizza" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                {pizzas.map((pizza) => (
+                                  <SelectItem
+                                    key={pizza.id}
+                                    value={`${pizza.name}`}
+                                  >
+                                    {pizza.name}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        </div>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
                 </CardFooter>
               </Card>
             </CarouselItem>

@@ -121,7 +121,8 @@ export default function OrderPage() {
                     />
                   </div>
                   <div className="flex-1 text-center sm:text-left">
-                    <h2 className="text-xl font-semibold">{item.name}</h2>
+                    <h2 className="text-xl font-semibold ">{item.name}</h2>
+
                     <p className="font-medium hidden md:block text-gray-600">
                       {item.description}
                     </p>
