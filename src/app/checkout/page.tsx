@@ -3,6 +3,7 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import { useCart } from "@/context/CartContext";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,28 +12,15 @@ import { ShoppingBag } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
 interface FormValues {
-  name: string;
-  address: string;
-  city: string;
-  postal: string;
-  country: string;
-  cardNumber: string;
-  expiryDate: string;
-  cvv: string;
+  [key: string]: string;
 }
 
 interface FormErrors {
-  name?: string;
-  address?: string;
-  city?: string;
-  postal?: string;
-  country?: string;
-  cardNumber?: string;
-  expiryDate?: string;
-  cvv?: string;
+  [key: string]: string | undefined;
 }
 
 export default function CheckoutPage() {
+  const router = useRouter();
   const { cart, isInitialized } = useCart();
   const [formValues, setFormValues] = useState<FormValues>({
     name: "",
@@ -65,17 +53,17 @@ export default function CheckoutPage() {
       cvv,
     } = formValues;
 
-    if (!name) newErrors.name = "Name is required";
-    if (!address) newErrors.address = "Address is required";
-    if (!city) newErrors.city = "City is required";
-    if (!postal) newErrors.postal = "Postal Code is required";
-    if (!country) newErrors.country = "Country is required";
-    const cleanedCardNumber = cardNumber.replace(/\s+/g, "");
-    if (!cleanedCardNumber || !/^\d{16}$/.test(cleanedCardNumber))
-      newErrors.cardNumber = "Card Number must be 16 digits";
-    if (!expiryDate || !/^\d{2}\/\d{2}$/.test(expiryDate))
-      newErrors.expiryDate = "Expiry Date must be in MM/YY format";
-    if (!cvv || !/^\d{3}$/.test(cvv)) newErrors.cvv = "CVV must be 3 digits";
+    // if (!name) newErrors.name = "Name is required";
+    // if (!address) newErrors.address = "Address is required";
+    // if (!city) newErrors.city = "City is required";
+    // if (!postal) newErrors.postal = "Postal Code is required";
+    // if (!country) newErrors.country = "Country is required";
+    // const cleanedCardNumber = cardNumber.replace(/\s+/g, "");
+    // if (!cleanedCardNumber || !/^\d{16}$/.test(cleanedCardNumber))
+    //   newErrors.cardNumber = "Card Number must be 16 digits";
+    // if (!expiryDate || !/^\d{2}\/\d{2}$/.test(expiryDate))
+    //   newErrors.expiryDate = "Expiry Date must be in MM/YY format";
+    // if (!cvv || !/^\d{3}$/.test(cvv)) newErrors.cvv = "CVV must be 3 digits";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -84,7 +72,7 @@ export default function CheckoutPage() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log("Form submitted:", formValues);
+      router.push("/thankyou");
     }
   };
 
@@ -246,7 +234,7 @@ export default function CheckoutPage() {
                   </div>
                   <div className="text-right">
                     <p className="font-semibold">
-                      ${item.price * item.quantity}
+                      ${(item.price * item.quantity).toFixed(2)}
                     </p>
                   </div>
                 </div>
