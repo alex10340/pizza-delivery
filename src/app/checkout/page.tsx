@@ -1,4 +1,5 @@
 "use client";
+import { useState, ChangeEvent, FormEvent } from "react";
 import { useCart } from "@/context/CartContext";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,8 +10,83 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ShoppingBag } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
+interface FormValues {
+  name: string;
+  address: string;
+  city: string;
+  postal: string;
+  country: string;
+  cardNumber: string;
+  expiryDate: string;
+  cvv: string;
+}
+
+interface FormErrors {
+  name?: string;
+  address?: string;
+  city?: string;
+  postal?: string;
+  country?: string;
+  cardNumber?: string;
+  expiryDate?: string;
+  cvv?: string;
+}
+
 export default function CheckoutPage() {
   const { cart, isInitialized } = useCart();
+  const [formValues, setFormValues] = useState<FormValues>({
+    name: "",
+    address: "",
+    city: "",
+    postal: "",
+    country: "",
+    cardNumber: "",
+    expiryDate: "",
+    cvv: "",
+  });
+
+  const [errors, setErrors] = useState<FormErrors>({});
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setFormValues((prevValues) => ({ ...prevValues, [id]: value }));
+  };
+
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {};
+    const {
+      name,
+      address,
+      city,
+      postal,
+      country,
+      cardNumber,
+      expiryDate,
+      cvv,
+    } = formValues;
+
+    if (!name) newErrors.name = "Name is required";
+    if (!address) newErrors.address = "Address is required";
+    if (!city) newErrors.city = "City is required";
+    if (!postal) newErrors.postal = "Postal Code is required";
+    if (!country) newErrors.country = "Country is required";
+    const cleanedCardNumber = cardNumber.replace(/\s+/g, "");
+    if (!cleanedCardNumber || !/^\d{16}$/.test(cleanedCardNumber))
+      newErrors.cardNumber = "Card Number must be 16 digits";
+    if (!expiryDate || !/^\d{2}\/\d{2}$/.test(expiryDate))
+      newErrors.expiryDate = "Expiry Date must be in MM/YY format";
+    if (!cvv || !/^\d{3}$/.test(cvv)) newErrors.cvv = "CVV must be 3 digits";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (validateForm()) {
+      console.log("Form submitted:", formValues);
+    }
+  };
 
   const renderSkeleton = () => (
     <div className="flex flex-col-reverse lg:flex-row gap-10">
@@ -131,7 +207,10 @@ export default function CheckoutPage() {
         Checkout
       </h1>
 
-      <div className="flex flex-col-reverse lg:flex-row gap-10">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col-reverse lg:flex-row gap-10"
+      >
         <div className="lg:w-1/2 space-y-6">
           <Card>
             <CardHeader>
@@ -187,11 +266,12 @@ export default function CheckoutPage() {
             </CardContent>
           </Card>
           <div className="lg:hidden">
-            <Link href="/thankyou" className="flex justify-center">
-              <Button className="w-full md:w-full bg-green-500 text-white hover:bg-green-600">
-                Place Order
-              </Button>
-            </Link>
+            <Button
+              type="submit"
+              className="w-full md:w-full bg-green-500 text-white hover:bg-green-600"
+            >
+              Place Order
+            </Button>
           </div>
         </div>
         <div className="lg:w-1/2 space-y-10">
@@ -202,34 +282,23 @@ export default function CheckoutPage() {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">Name</Label>
-                <Input id="name" placeholder="Your Name" className="w-full" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="address">Address</Label>
-                <Input
-                  id="address"
-                  placeholder="123 Main St, Apt 4B"
-                  className="w-full"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="city">City</Label>
-                <Input id="city" placeholder="City" className="w-full" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="postal">Postal Code</Label>
-                <Input
-                  id="postal"
-                  placeholder="Postal Code"
-                  className="w-full"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="country">Country</Label>
-                <Input id="country" placeholder="Country" className="w-full" />
-              </div>
+              {["name", "address", "city", "postal", "country"].map((field) => (
+                <div key={field} className="space-y-2">
+                  <Label htmlFor={field}>{formatLabel(field)}</Label>
+                  <Input
+                    id={field}
+                    value={formValues[field as keyof FormValues]}
+                    onChange={handleChange}
+                    placeholder={getPlaceholder(field)}
+                    className="w-full"
+                  />
+                  {errors[field as keyof FormErrors] && (
+                    <p className="text-red-500 text-sm">
+                      {errors[field as keyof FormErrors]}
+                    </p>
+                  )}
+                </div>
+              ))}
             </CardContent>
           </Card>
 
@@ -240,37 +309,67 @@ export default function CheckoutPage() {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="card-number">Card Number</Label>
-                <Input
-                  id="card-number"
-                  placeholder="1234 5678 9012 3456"
-                  className="w-full"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="expiry-date">Expiry Date</Label>
-                <Input
-                  id="expiry-date"
-                  placeholder="MM/YY"
-                  className="w-full"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="cvv">CVV</Label>
-                <Input id="cvv" placeholder="123" className="w-full" />
-              </div>
+              {["cardNumber", "expiryDate", "cvv"].map((field) => (
+                <div key={field} className="space-y-2">
+                  <Label htmlFor={field}>{formatLabel(field)}</Label>
+                  <Input
+                    id={field}
+                    value={formValues[field as keyof FormValues]}
+                    onChange={handleChange}
+                    placeholder={getPlaceholder(field)}
+                    className="w-full"
+                  />
+                  {errors[field as keyof FormErrors] && (
+                    <p className="text-red-500 text-sm">
+                      {errors[field as keyof FormErrors]}
+                    </p>
+                  )}
+                </div>
+              ))}
             </CardContent>
           </Card>
           <div className="hidden lg:block">
-            <Link href="/thankyou" className="flex justify-center">
-              <Button className="w-full md:w-full bg-green-500 text-white hover:bg-green-600">
-                Place Order
-              </Button>
-            </Link>
+            <Button
+              type="submit"
+              className="w-full md:w-full bg-green-500 text-white hover:bg-green-600"
+            >
+              Place Order
+            </Button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
+
+const formatLabel = (field: string): string => {
+  const labels: { [key: string]: string } = {
+    name: "Name",
+    address: "Address",
+    city: "City",
+    postal: "Postal Code",
+    country: "Country",
+    cardNumber: "Card Number",
+    expiryDate: "Expiry Date",
+    cvv: "CVV",
+  };
+  return labels[field] || capitalizeFirstLetter(field);
+};
+
+const capitalizeFirstLetter = (string: string): string => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+const getPlaceholder = (field: string): string => {
+  const placeholders: { [key: string]: string } = {
+    name: "Your Name",
+    address: "123 Main St, Apt 4B",
+    city: "City",
+    postal: "Postal Code",
+    country: "Country",
+    cardNumber: "1234 5678 9012 3456",
+    expiryDate: "MM/YY",
+    cvv: "123",
+  };
+  return placeholders[field] || "";
+};
