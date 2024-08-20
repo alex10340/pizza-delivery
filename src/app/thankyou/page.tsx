@@ -37,7 +37,7 @@ export default function ThankYouPage() {
 
   return (
     isInitialized && (
-      <div className="max-w-[800px] mx-auto p-6 my-6">
+      <div className="max-w-[800px] mx-auto sm:p-6 my-6">
         <h1 className="underline decoration-primary underline-offset-8 decoration-dashed pb-10 scroll-m-20 text-center text-4xl font-extrabold tracking-tight lg:text-5xl">
           Thank You!
         </h1>
@@ -83,14 +83,13 @@ export default function ThankYouPage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {cartCopy.length === 0 && "No items in order"}
                   {cartCopy.map((item) => (
                     <div
                       key={item.id + item.type}
                       className="flex items-center justify-between p-4 border rounded-lg bg-gray-50"
                     >
                       <div className="flex items-center space-x-4">
-                        <div className="relative w-20 h-20">
+                        <div className="relative w-20 h-20 sm:w-16 sm:h-16 xs:w-12 xs:h-12 flex-shrink-0">
                           <Image
                             src={item.image}
                             alt={item.name}
@@ -100,18 +99,20 @@ export default function ThankYouPage() {
                           />
                         </div>
                         <div>
-                          <h2 className="text-xl font-semibold">{item.name}</h2>
-                          <p className="font-medium text-gray-600">
+                          <h2 className="text-md sm:text-xl font-semibold">
+                            {item.name}
+                          </h2>
+                          <p className="text-sm sm:text-base font-medium text-gray-600">
                             Quantity: {item.quantity}
                           </p>
-                          <p className="font-medium text-gray-600">
+                          <p className="text-sm sm:text-base font-medium text-gray-600">
                             Price: ${item.price.toFixed(2)}
                           </p>
                         </div>
                       </div>
                       <div className="text-right">
                         <p className="font-semibold">
-                          ${item.price * item.quantity}
+                          ${(item.price * item.quantity).toFixed(2)}
                         </p>
                       </div>
                     </div>

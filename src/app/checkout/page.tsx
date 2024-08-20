@@ -213,7 +213,7 @@ export default function CheckoutPage() {
                   className="flex items-center justify-between p-4 border rounded-lg bg-gray-50"
                 >
                   <div className="flex items-center space-x-4">
-                    <div className="relative w-20 h-20">
+                    <div className="relative w-20 h-20 sm:w-16 sm:h-16 xs:w-12 xs:h-12 flex-shrink-0">
                       <Image
                         src={item.image}
                         alt={item.name}
@@ -223,11 +223,13 @@ export default function CheckoutPage() {
                       />
                     </div>
                     <div>
-                      <h2 className="text-xl font-semibold">{item.name}</h2>
-                      <p className="font-medium text-gray-600">
+                      <h2 className="text-md sm:text-xl font-semibold">
+                        {item.name}
+                      </h2>
+                      <p className="text-sm sm:text-base font-medium text-gray-600">
                         Quantity: {item.quantity}
                       </p>
-                      <p className="font-medium text-gray-600">
+                      <p className="text-sm sm:text-base font-medium text-gray-600">
                         Price: ${item.price.toFixed(2)}
                       </p>
                     </div>
@@ -239,6 +241,7 @@ export default function CheckoutPage() {
                   </div>
                 </div>
               ))}
+
               <div className="flex justify-between font-bold text-lg border-t pt-4 mt-4">
                 <span>Total:</span>
                 <span>
