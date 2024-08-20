@@ -212,7 +212,7 @@ export default function CheckoutPage() {
                   key={item.id + item.type}
                   className="flex items-center justify-between p-4 border rounded-lg bg-gray-50"
                 >
-                  <div className="flex items-center space-x-4">
+                  <div className="flex space-x-4">
                     <div className="relative w-20 h-20 sm:w-16 sm:h-16 flex-shrink-0">
                       <Image
                         src={item.image}
@@ -226,6 +226,12 @@ export default function CheckoutPage() {
                       <h2 className="text-md sm:text-xl font-semibold">
                         {item.name}
                       </h2>
+                      {item.selectedItemsString && (
+                        <p className="text-sm sm:text-base max-w-[200px] font-medium text-gray-600">
+                          {item.selectedItemsString}
+                        </p>
+                      )}
+
                       <p className="text-sm sm:text-base font-medium text-gray-600">
                         Quantity: {item.quantity}
                       </p>

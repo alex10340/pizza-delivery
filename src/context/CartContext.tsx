@@ -117,7 +117,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         );
 
         return (
-          <div className="flex w-full justify-center bg-transparent items-center p-4 space-x-4 rounded-xl shadow-lg border border-gray-200">
+          <div className="flex w-full justify-center bg-transparent p-4 space-x-4 rounded-xl shadow-lg border border-gray-200">
             <div className="relative w-16 h-16">
               <Image
                 src={product.image}
