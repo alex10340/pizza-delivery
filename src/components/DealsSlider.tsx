@@ -24,6 +24,7 @@ import {
 
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -51,7 +52,7 @@ export function DealsSlider() {
     <>
       <h2
         className="scroll-m-20 text-center pb-4 text-3xl font-semibold tracking-tight text-white underline
-       decoration-primary underline-offset-8 decoration-dashed"
+        decoration-primary underline-offset-8 decoration-dashed"
       >
         Hot Deals
       </h2>
@@ -89,12 +90,14 @@ export function DealsSlider() {
                       <Button>Select Items</Button>
                     </DialogTrigger>
                     <DialogContent>
-                      <DialogTitle className="text-2xl">
-                        Select Items
-                      </DialogTitle>
-                      <DialogDescription>
-                        Select items for your combo!
-                      </DialogDescription>
+                      <DialogHeader>
+                        <DialogTitle className="text-2xl">
+                          Select Items
+                        </DialogTitle>
+                        <DialogDescription>
+                          Select items for your combo!
+                        </DialogDescription>
+                      </DialogHeader>
 
                       <div className="text-black space-y-6">
                         <div className="flex flex-col sm:flex-row items-center justify-between p-4 border rounded-lg shadow-sm bg-gray-50">
@@ -123,77 +126,94 @@ export function DealsSlider() {
                           </div>
                         </div>
 
-                        <div className="flex flex-wrap justify-between gap-4">
-                          <div className="flex gap-4 flex-wrap w-full sm:w-[300px]">
-                            <p className="text-lg font-semibold leading-none tracking-tight">
-                              Select Pizzas
-                            </p>
-                            <Select>
-                              <SelectTrigger className="w-full">
-                                <SelectValue placeholder="Select Pizza" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                {pizzas.map((pizza) => (
-                                  <SelectItem
-                                    key={pizza.id}
-                                    value={`${pizza.name}`}
-                                  >
-                                    {pizza.name}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                            <Select>
-                              <SelectTrigger className="w-full">
-                                <SelectValue placeholder="Select Pizza" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                {pizzas.map((pizza) => (
-                                  <SelectItem
-                                    key={pizza.id}
-                                    value={`${pizza.name}`}
-                                  >
-                                    {pizza.name}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                          </div>
-                          <div className="flex gap-4 flex-wrap w-full sm:w-[300px]">
-                            <p className="text-lg font-semibold leading-none tracking-tight">
-                              Select Pizzas
-                            </p>
-                            <Select>
-                              <SelectTrigger className="w-full">
-                                <SelectValue placeholder="Select Pizza" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                {pizzas.map((pizza) => (
-                                  <SelectItem
-                                    key={pizza.id}
-                                    value={`${pizza.name}`}
-                                  >
-                                    {pizza.name}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                            <Select>
-                              <SelectTrigger className="w-full">
-                                <SelectValue placeholder="Select Pizza" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                {pizzas.map((pizza) => (
-                                  <SelectItem
-                                    key={pizza.id}
-                                    value={`${pizza.name}`}
-                                  >
-                                    {pizza.name}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                          </div>
+                        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 ">
+                          {[...Array(combo.pizzaQty)].map((_, index) => (
+                            <div
+                              key={`pizza-${index}`}
+                              className="flex flex-col gap-2"
+                            >
+                              <p className="text-lg font-semibold leading-none tracking-tight">
+                                Select Pizza {index + 1}
+                              </p>
+                              <Select>
+                                <SelectTrigger className="w-full">
+                                  <SelectValue placeholder="Select Pizza" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  {pizzas.map((pizza) => (
+                                    <SelectItem
+                                      key={pizza.id}
+                                      value={`${pizza.name}`}
+                                    >
+                                      {pizza.name}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                            </div>
+                          ))}
+
+                          {[...Array(combo.dessertQty)].map((_, index) => (
+                            <div
+                              key={`dessert-${index}`}
+                              className="flex flex-col gap-2"
+                            >
+                              <p className="text-lg font-semibold leading-none tracking-tight">
+                                Select Dessert {index + 1}
+                              </p>
+                              <Select>
+                                <SelectTrigger className="w-full">
+                                  <SelectValue placeholder="Select Dessert" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  {desserts.map((dessert) => (
+                                    <SelectItem
+                                      key={dessert.id}
+                                      value={`${dessert.name}`}
+                                    >
+                                      {dessert.name}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                            </div>
+                          ))}
+
+                          {[...Array(combo.beverageQty)].map((_, index) => (
+                            <div
+                              key={`beverage-${index}`}
+                              className="flex flex-col gap-2"
+                            >
+                              <p className="text-lg font-semibold leading-none tracking-tight">
+                                Select Beverage {index + 1}
+                              </p>
+                              <Select>
+                                <SelectTrigger className="w-full">
+                                  <SelectValue placeholder="Select Beverage" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  {beverages.map((beverage) => (
+                                    <SelectItem
+                                      key={beverage.id}
+                                      value={`${beverage.name}`}
+                                    >
+                                      {beverage.name}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="flex justify-center">
+                          <DialogClose asChild>
+                            <Button
+                              className="w-full"
+                              onClick={() => addToCart(combo)}
+                            >
+                              Add to order
+                            </Button>
+                          </DialogClose>
                         </div>
                       </div>
                     </DialogContent>
