@@ -218,64 +218,62 @@ export default function CheckoutPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               {cart.map((item) => (
-                <div>
-                  <div
-                    key={item.id + item.type + item.selectedItemsString}
-                    className="flex items-center justify-between p-4 border rounded-lg bg-gray-50"
-                  >
-                    <div className="flex items-center space-x-4">
-                      <div className="relative w-16 h-16 flex-shrink-0">
-                        <Image
-                          src={item.image}
-                          alt={item.name}
-                          fill
-                          sizes="100%"
-                          className="object-cover rounded-md"
-                        />
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-semibold">{item.name}</h3>
-                        <p className="text-sm text-muted-foreground">
-                          {item.quantity} x ${item.price}
-                        </p>
-                      </div>
+                <div
+                  key={item.id + item.type + item.selectedItemsString}
+                  className="flex items-center justify-between p-4 border rounded-lg bg-gray-50"
+                >
+                  <div className="flex items-center space-x-4">
+                    <div className="relative w-16 h-16 flex-shrink-0">
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        fill
+                        sizes="100%"
+                        className="object-cover rounded-md"
+                      />
                     </div>
-                    <div className="flex flex-col-reverse sm:flex-row sm:items-center sm:space-x-4 text-right">
-                      {item.selectedItemsString && (
-                        <Dialog>
-                          <DialogTrigger asChild>
-                            <Button
-                              variant="outline"
-                              className="text-xs w-14 h-8 sm:text-sm sm:w-auto"
-                            >
-                              Details
-                            </Button>
-                          </DialogTrigger>
-                          <DialogContent className="sm:max-w-md">
-                            <DialogHeader className="items-center">
-                              <div className="relative w-32 h-32 sm:w-20 sm:h-20 flex-shrink-0">
-                                <Image
-                                  src={item.image}
-                                  alt={item.name}
-                                  fill
-                                  sizes="100%"
-                                  className="object-cover rounded-md"
-                                />
-                              </div>
-                              <DialogTitle className="text-2xl">
-                                {item.name}
-                              </DialogTitle>
-                              <DialogDescription className="">
-                                Selected Items: {item.selectedItemsString}
-                              </DialogDescription>
-                            </DialogHeader>
-                          </DialogContent>
-                        </Dialog>
-                      )}
-                      <p className="font-semibold">
-                        ${(item.price * item.quantity).toFixed(2)}
+                    <div>
+                      <h3 className="text-lg font-semibold">{item.name}</h3>
+                      <p className="text-sm text-muted-foreground">
+                        {item.quantity} x ${item.price}
                       </p>
                     </div>
+                  </div>
+                  <div className="flex flex-col-reverse sm:flex-row sm:items-center sm:space-x-4 text-right">
+                    {item.selectedItemsString && (
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button
+                            variant="outline"
+                            className="text-xs w-14 h-8 sm:text-sm sm:w-auto"
+                          >
+                            Details
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-md">
+                          <DialogHeader className="items-center">
+                            <div className="relative w-32 h-32 sm:w-20 sm:h-20 flex-shrink-0">
+                              <Image
+                                src={item.image}
+                                alt={item.name}
+                                fill
+                                sizes="100%"
+                                className="object-cover rounded-md"
+                              />
+                            </div>
+                            <DialogTitle className="text-2xl">
+                              {item.name}
+                            </DialogTitle>
+                            <DialogDescription className="">
+                              Selected Items: {item.selectedItemsString}
+                            </DialogDescription>
+                          </DialogHeader>
+                        </DialogContent>
+                      </Dialog>
+                    )}
+                    <p className="font-semibold">
+                      ${(item.price * item.quantity).toFixed(2)}
+                    </p>
                   </div>
                 </div>
               ))}

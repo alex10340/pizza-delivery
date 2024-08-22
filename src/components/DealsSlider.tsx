@@ -72,8 +72,6 @@ export function DealsSlider() {
       updatedSelections[index] = value;
 
       const newSelections = { ...prev, [category]: updatedSelections };
-      console.log(newSelections);
-
       return newSelections;
     });
   };

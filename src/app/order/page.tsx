@@ -118,7 +118,7 @@ export default function OrderPage() {
           <CardContent className="space-y-4">
             {cart.map((item) => (
               <div
-                key={item.id + item.type}
+                key={item.id + item.type + item.selectedItemsString}
                 className="flex flex-col sm:flex-row items-center justify-between p-4 border rounded-lg shadow-sm bg-gray-50"
               >
                 <div className="flex items-center space-x-4 w-full sm:w-auto">
