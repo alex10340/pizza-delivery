@@ -8,6 +8,14 @@ import { Heart } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { useEffect, useState } from "react";
 import { useCart } from "@/context/CartContext";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 export default function ThankYouPage() {
   const { cart, clearCart } = useCart();
@@ -84,42 +92,72 @@ export default function ThankYouPage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {cartCopy.map((item) => (
-                    <div
-                      key={item.id + item.type}
-                      className="flex items-center justify-between p-4 border rounded-lg bg-gray-50"
-                    >
-                      <div className="flex items-center space-x-4">
-                        <div className="relative w-20 h-20 sm:w-16 sm:h-16 flex-shrink-0">
-                          <Image
-                            src={item.image}
-                            alt={item.name}
-                            fill
-                            sizes="100%"
-                            className="object-cover rounded-md"
-                          />
+                    <div>
+                      <div
+                        key={item.id + item.type + item.selectedItemsString}
+                        className="flex items-center justify-between p-4 border rounded-lg bg-gray-50"
+                      >
+                        <div className="flex items-center space-x-4">
+                          <div className="relative w-16 h-16 flex-shrink-0">
+                            <Image
+                              src={item.image}
+                              alt={item.name}
+                              fill
+                              sizes="100%"
+                              className="object-cover rounded-md"
+                            />
+                          </div>
+                          <div>
+                            <h3 className="text-lg font-semibold">
+                              {item.name}
+                            </h3>
+                            <p className="text-sm text-muted-foreground">
+                              {item.quantity} x ${item.price}
+                            </p>
+                          </div>
                         </div>
-                        <div>
-                          <h2 className="text-md sm:text-xl font-semibold">
-                            {item.name}
-                          </h2>
-                          <p className="text-sm sm:text-base font-medium text-gray-600">
-                            Quantity: {item.quantity}
-                          </p>
-                          <p className="text-sm sm:text-base font-medium text-gray-600">
-                            Price: ${item.price.toFixed(2)}
+                        <div className="flex flex-col-reverse sm:flex-row sm:items-center sm:space-x-4 text-right">
+                          {item.selectedItemsString && (
+                            <Dialog>
+                              <DialogTrigger asChild>
+                                <Button
+                                  variant="outline"
+                                  className="text-xs w-14 h-8 sm:text-sm sm:w-auto"
+                                >
+                                  Details
+                                </Button>
+                              </DialogTrigger>
+                              <DialogContent className="sm:max-w-md">
+                                <DialogHeader className="items-center">
+                                  <div className="relative w-32 h-32 sm:w-20 sm:h-20 flex-shrink-0">
+                                    <Image
+                                      src={item.image}
+                                      alt={item.name}
+                                      fill
+                                      sizes="100%"
+                                      className="object-cover rounded-md"
+                                    />
+                                  </div>
+                                  <DialogTitle className="text-2xl">
+                                    {item.name}
+                                  </DialogTitle>
+                                  <DialogDescription className="">
+                                    Selected Items: {item.selectedItemsString}
+                                  </DialogDescription>
+                                </DialogHeader>
+                              </DialogContent>
+                            </Dialog>
+                          )}
+                          <p className="font-semibold">
+                            ${(item.price * item.quantity).toFixed(2)}
                           </p>
                         </div>
-                      </div>
-                      <div className="text-right">
-                        <p className="font-semibold">
-                          ${(item.price * item.quantity).toFixed(2)}
-                        </p>
                       </div>
                     </div>
                   ))}
                   <div className="flex justify-between font-bold text-lg border-t pt-4 mt-4">
-                    <span>Total:</span>
-                    <span>
+                    <p>Total</p>
+                    <p>
                       $
                       {cartCopy
                         .reduce(
@@ -127,7 +165,7 @@ export default function ThankYouPage() {
                           0
                         )
                         .toFixed(2)}
-                    </span>
+                    </p>
                   </div>
                 </CardContent>
               </Card>

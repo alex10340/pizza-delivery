@@ -190,7 +190,10 @@ export default function OrderPage() {
                   {item.selectedItemsString && (
                     <Dialog>
                       <DialogTrigger asChild>
-                        <Button variant="outline" className="ml-2 h-8">
+                        <Button
+                          variant="outline"
+                          className="text-xs w-16 h-8 sm:text-sm sm:w-auto"
+                        >
                           Details
                         </Button>
                       </DialogTrigger>
@@ -225,7 +228,7 @@ export default function OrderPage() {
                       )
                     }
                     variant="destructive"
-                    className="ml-2 h-8"
+                    className="text-xs w-18 h-8 sm:text-sm sm:w-auto"
                   >
                     Remove
                   </Button>

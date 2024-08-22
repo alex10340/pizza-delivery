@@ -44,7 +44,19 @@ export default function CheckoutPage() {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
-    setFormValues((prevValues) => ({ ...prevValues, [id]: value }));
+
+    if (id === "expiryDate") {
+      let formattedValue = value.replace(/\D/g, "");
+
+      if (formattedValue.length > 2) {
+        formattedValue =
+          formattedValue.slice(0, 2) + "/" + formattedValue.slice(2);
+      }
+
+      setFormValues((prevValues) => ({ ...prevValues, [id]: formattedValue }));
+    } else {
+      setFormValues((prevValues) => ({ ...prevValues, [id]: value }));
+    }
   };
 
   const validateForm = (): boolean => {
@@ -206,73 +218,70 @@ export default function CheckoutPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               {cart.map((item) => (
-                <div
-                  key={item.id + item.type}
-                  className="flex items-center justify-between p-4 border rounded-lg bg-gray-50"
-                >
-                  <div className="flex items-center space-x-4">
-                    <div className="relative w-16 h-16 flex-shrink-0">
-                      <Image
-                        src={item.image}
-                        alt={item.name}
-                        fill
-                        sizes="100%"
-                        className="object-cover rounded-md"
-                      />
+                <div>
+                  <div
+                    key={item.id + item.type + item.selectedItemsString}
+                    className="flex items-center justify-between p-4 border rounded-lg bg-gray-50"
+                  >
+                    <div className="flex items-center space-x-4">
+                      <div className="relative w-16 h-16 flex-shrink-0">
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          fill
+                          sizes="100%"
+                          className="object-cover rounded-md"
+                        />
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-semibold">{item.name}</h3>
+                        <p className="text-sm text-muted-foreground">
+                          {item.quantity} x ${item.price}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <h2 className="text-md sm:text-xl font-semibold">
-                        {item.name}
-                      </h2>
-
-                      <p className="text-sm sm:text-base font-medium text-gray-600">
-                        Quantity: {item.quantity}
-                      </p>
-                      <p className="text-sm sm:text-base font-medium text-gray-600">
-                        Price: ${item.price.toFixed(2)}
+                    <div className="flex flex-col-reverse sm:flex-row sm:items-center sm:space-x-4 text-right">
+                      {item.selectedItemsString && (
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <Button
+                              variant="outline"
+                              className="text-xs w-14 h-8 sm:text-sm sm:w-auto"
+                            >
+                              Details
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent className="sm:max-w-md">
+                            <DialogHeader className="items-center">
+                              <div className="relative w-32 h-32 sm:w-20 sm:h-20 flex-shrink-0">
+                                <Image
+                                  src={item.image}
+                                  alt={item.name}
+                                  fill
+                                  sizes="100%"
+                                  className="object-cover rounded-md"
+                                />
+                              </div>
+                              <DialogTitle className="text-2xl">
+                                {item.name}
+                              </DialogTitle>
+                              <DialogDescription className="">
+                                Selected Items: {item.selectedItemsString}
+                              </DialogDescription>
+                            </DialogHeader>
+                          </DialogContent>
+                        </Dialog>
+                      )}
+                      <p className="font-semibold">
+                        ${(item.price * item.quantity).toFixed(2)}
                       </p>
                     </div>
-                  </div>
-
-                  <div className="flex items-end flex-col-reverse sm:flex-row sm:space-x-4 text-right">
-                    {item.selectedItemsString && (
-                      <Dialog>
-                        <DialogTrigger asChild>
-                          <Button variant="outline" className="h-8">
-                            Details
-                          </Button>
-                        </DialogTrigger>
-                        <DialogContent className="sm:max-w-md">
-                          <DialogHeader className="items-center">
-                            <div className="relative w-32 h-32 sm:w-20 sm:h-20 flex-shrink-0">
-                              <Image
-                                src={item.image}
-                                alt={item.name}
-                                fill
-                                sizes="100%"
-                                className="object-cover rounded-md"
-                              />
-                            </div>
-                            <DialogTitle className="text-2xl">
-                              {item.name}
-                            </DialogTitle>
-                            <DialogDescription className="">
-                              Selected Items: {item.selectedItemsString}
-                            </DialogDescription>
-                          </DialogHeader>
-                        </DialogContent>
-                      </Dialog>
-                    )}
-                    <p className="font-semibold">
-                      ${(item.price * item.quantity).toFixed(2)}
-                    </p>
                   </div>
                 </div>
               ))}
-
               <div className="flex justify-between font-bold text-lg border-t pt-4 mt-4">
-                <span>Total:</span>
-                <span>
+                <p>Total</p>
+                <p>
                   $
                   {cart
                     .reduce(
@@ -280,7 +289,7 @@ export default function CheckoutPage() {
                       0
                     )
                     .toFixed(2)}
-                </span>
+                </p>
               </div>
             </CardContent>
           </Card>
@@ -297,60 +306,144 @@ export default function CheckoutPage() {
           <Card>
             <CardHeader>
               <CardTitle className="text-2xl font-semibold">
-                Delivery Information
+                Delivery Details
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {["name", "address", "city", "postal"].map((field) => (
-                <div key={field} className="space-y-2">
-                  <Label htmlFor={field}>{formatLabel(field)}</Label>
+              <div className="space-y-2">
+                <Label htmlFor="name">Name</Label>
+                <Input
+                  type="text"
+                  id="name"
+                  placeholder="Your Name"
+                  value={formValues.name}
+                  onChange={handleChange}
+                  required
+                  className={`border ${errors.name ? "border-red-500" : ""}`}
+                />
+                {errors.name && (
+                  <p className="text-red-500 text-sm">{errors.name}</p>
+                )}
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="address">Address</Label>
+                <Input
+                  type="text"
+                  id="address"
+                  placeholder="123 Main Street"
+                  value={formValues.address}
+                  onChange={handleChange}
+                  required
+                  className={`border ${errors.address ? "border-red-500" : ""}`}
+                />
+                {errors.address && (
+                  <p className="text-red-500 text-sm">{errors.address}</p>
+                )}
+              </div>
+              <div className="flex space-x-4">
+                <div className="space-y-2 w-1/2">
+                  <Label htmlFor="city">City</Label>
                   <Input
-                    id={field}
-                    value={formValues[field as keyof FormValues]}
+                    type="text"
+                    id="city"
+                    placeholder="City"
+                    value={formValues.city}
                     onChange={handleChange}
-                    placeholder={getPlaceholder(field)}
-                    className="w-full"
+                    required
+                    className={`border ${errors.city ? "border-red-500" : ""}`}
                   />
-                  {errors[field as keyof FormErrors] && (
-                    <p className="text-red-500 text-sm">
-                      {errors[field as keyof FormErrors]}
-                    </p>
+                  {errors.city && (
+                    <p className="text-red-500 text-sm">{errors.city}</p>
                   )}
                 </div>
-              ))}
+                <div className="space-y-2 w-1/2">
+                  <Label htmlFor="postal">Postal Code</Label>
+                  <Input
+                    type="text"
+                    id="postal"
+                    placeholder="Postal Code"
+                    value={formValues.postal}
+                    onChange={handleChange}
+                    required
+                    className={`border ${
+                      errors.postal ? "border-red-500" : ""
+                    }`}
+                  />
+                  {errors.postal && (
+                    <p className="text-red-500 text-sm">{errors.postal}</p>
+                  )}
+                </div>
+              </div>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
               <CardTitle className="text-2xl font-semibold">
-                Payment Information
+                Payment Details
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {["cardNumber", "expiryDate", "cvv"].map((field) => (
-                <div key={field} className="space-y-2">
-                  <Label htmlFor={field}>{formatLabel(field)}</Label>
+              <div className="space-y-2">
+                <Label htmlFor="cardNumber">Card Number</Label>
+                <Input
+                  type="text"
+                  id="cardNumber"
+                  placeholder="1234 5678 9012 3456"
+                  value={formValues.cardNumber}
+                  onChange={handleChange}
+                  required
+                  className={`border ${
+                    errors.cardNumber ? "border-red-500" : ""
+                  }`}
+                />
+                {errors.cardNumber && (
+                  <p className="text-red-500 text-sm">{errors.cardNumber}</p>
+                )}
+              </div>
+              <div className="flex space-x-4">
+                <div className="space-y-2 w-1/2">
+                  <Label htmlFor="expiryDate">Expiry Date</Label>
                   <Input
-                    id={field}
-                    value={formValues[field as keyof FormValues]}
+                    type="text"
+                    id="expiryDate"
+                    value={formValues.expiryDate}
                     onChange={handleChange}
-                    placeholder={getPlaceholder(field)}
-                    className="w-full"
+                    required
+                    maxLength={5}
+                    placeholder="MM/YY"
+                    className={`border ${
+                      errors.expiryDate ? "border-red-500" : ""
+                    }`}
                   />
-                  {errors[field as keyof FormErrors] && (
-                    <p className="text-red-500 text-sm">
-                      {errors[field as keyof FormErrors]}
-                    </p>
+                  {errors.expiryDate && (
+                    <p className="text-red-500 text-sm">{errors.expiryDate}</p>
                   )}
                 </div>
-              ))}
+                <div className="space-y-2 w-1/2">
+                  <Label htmlFor="cvv">CVV</Label>
+                  <Input
+                    type="text"
+                    id="cvv"
+                    placeholder="123"
+                    value={formValues.cvv}
+                    onChange={handleChange}
+                    required
+                    maxLength={3}
+                    className={`border ${errors.cvv ? "border-red-500" : ""}`}
+                  />
+                  {errors.cvv && (
+                    <p className="text-red-500 text-sm">{errors.cvv}</p>
+                  )}
+                </div>
+              </div>
             </CardContent>
           </Card>
+
           <div className="hidden lg:block">
             <Button
               type="submit"
-              className="w-full md:w-full bg-green-500 text-white hover:bg-green-600"
+              className="w-full bg-green-500 text-white hover:bg-green-600"
             >
               Place Order
             </Button>
@@ -360,33 +453,3 @@ export default function CheckoutPage() {
     </div>
   );
 }
-
-const formatLabel = (field: string): string => {
-  const labels: { [key: string]: string } = {
-    name: "Name",
-    address: "Address",
-    city: "City",
-    postal: "Postal Code",
-    cardNumber: "Card Number",
-    expiryDate: "Expiry Date",
-    cvv: "CVV",
-  };
-  return labels[field] || capitalizeFirstLetter(field);
-};
-
-const capitalizeFirstLetter = (string: string): string => {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-};
-
-const getPlaceholder = (field: string): string => {
-  const placeholders: { [key: string]: string } = {
-    name: "Your Name",
-    address: "123 Main St, Apt 4B",
-    city: "City",
-    postal: "Postal Code",
-    cardNumber: "1234 5678 9012 3456",
-    expiryDate: "MM/YY",
-    cvv: "123",
-  };
-  return placeholders[field] || "";
-};
