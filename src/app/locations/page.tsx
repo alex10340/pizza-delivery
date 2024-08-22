@@ -7,12 +7,12 @@ export default function LocationsPage() {
         Our Locations
       </h1>
       <p className="leading-7 [&:not(:first-child)]:mt-8">
-        We're committed to serving you hot, fresh, and delicious pizzas at
-        multiple locations across the city. Whether you're craving a quick bite
-        or planning a family feast, our pizza joints are just around the corner.
-        Check out the list of our locations below to find the one nearest to
-        you. You can also order online and enjoy our speedy delivery right to
-        your doorstep!
+        We&apos;re committed to serving you hot, fresh, and delicious pizzas at
+        multiple locations across the city. Whether you&apos;re craving a quick
+        bite or planning a family feast, our pizza joints are just around the
+        corner. Check out the list of our locations below to find the one
+        nearest to you. You can also order online and enjoy our speedy delivery
+        right to your doorstep!
       </p>
       <h2 className="my-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
         Downtown Pizza Hub
@@ -49,9 +49,9 @@ export default function LocationsPage() {
       <p className="mt-6 border-l-2 pl-6">
         Located in the heart of Los Angeles, our Downtown Pizza Hub is the
         perfect spot for a quick lunch or an evening hangout. With cozy indoor
-        seating and a lively atmosphere, it's a great place to enjoy your
-        favorite slice. Don't forget to try our special lunch deals available on
-        weekdays!
+        seating and a lively atmosphere, it&apos;s a great place to enjoy your
+        favorite slice. Don&apos;t forget to try our special lunch deals
+        available on weekdays!
       </p>
 
       <h2 className="my-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
@@ -87,9 +87,9 @@ export default function LocationsPage() {
       </div>
       <p className="mt-6 border-l-2 pl-6">
         Our Uptown Pizza Spot is known for its family-friendly environment and
-        exceptional service. Whether you're dining in or picking up, we
-        guarantee a memorable experience with every visit. Check out our kids'
-        menu and weekend specials!
+        exceptional service. Whether you&apos;re dining in or picking up, we
+        guarantee a memorable experience with every visit. Check out our
+        kids&apos; menu and weekend specials!
       </p>
 
       <h2 className="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
@@ -117,8 +117,8 @@ export default function LocationsPage() {
       <p className="mt-6 border-l-2 pl-6">
         Situated in the bustling Midtown area of Chicago, our Pizza Plaza offers
         a modern dining space with quick service. Perfect for grabbing a slice
-        on the go or enjoying a relaxed meal with friends. Don't miss our happy
-        hour deals from 4:00 PM to 6:00 PM, Monday through Friday!
+        on the go or enjoying a relaxed meal with friends. Don&apos;t miss our
+        happy hour deals from 4:00 PM to 6:00 PM, Monday through Friday!
       </p>
 
       <h2 className="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
@@ -177,16 +177,16 @@ export default function LocationsPage() {
         Located in the historic Old Town district of Alexandria, our Pizza
         Corner brings a touch of tradition with its classic recipes and rustic
         décor. Perfect for a cozy date night or a nostalgic meal with family. Be
-        sure to ask about our weekly chef's special that's exclusive to this
-        location!
+        sure to ask about our weekly chef&apos;s special that&apos;s exclusive
+        to this location!
       </p>
 
       <h3 className="mt-8 scroll-m-20 text-2xl font-semibold tracking-tight">
         Coming Soon!
       </h3>
       <p className="leading-7 [&:not(:first-child)]:mt-6">
-        We're constantly expanding to bring our delicious pizzas closer to you!
-        Stay tuned for new locations opening soon in San Francisco, CA and
+        We&apos;re constantly expanding to bring our delicious pizzas closer to
+        you! Stay tuned for new locations opening soon in San Francisco, CA and
         Miami, FL. Follow us on social media for the latest updates and grand
         opening specials.
       </p>
