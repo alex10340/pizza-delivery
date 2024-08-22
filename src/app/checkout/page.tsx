@@ -10,6 +10,14 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ShoppingBag } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { DialogHeader } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 interface FormValues {
   [key: string]: string;
@@ -27,7 +35,6 @@ export default function CheckoutPage() {
     address: "",
     city: "",
     postal: "",
-    country: "",
     cardNumber: "",
     expiryDate: "",
     cvv: "",
@@ -42,28 +49,19 @@ export default function CheckoutPage() {
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
-    const {
-      name,
-      address,
-      city,
-      postal,
-      country,
-      cardNumber,
-      expiryDate,
-      cvv,
-    } = formValues;
+    const { name, address, city, postal, cardNumber, expiryDate, cvv } =
+      formValues;
 
-    // if (!name) newErrors.name = "Name is required";
-    // if (!address) newErrors.address = "Address is required";
-    // if (!city) newErrors.city = "City is required";
-    // if (!postal) newErrors.postal = "Postal Code is required";
-    // if (!country) newErrors.country = "Country is required";
-    // const cleanedCardNumber = cardNumber.replace(/\s+/g, "");
-    // if (!cleanedCardNumber || !/^\d{16}$/.test(cleanedCardNumber))
-    //   newErrors.cardNumber = "Card Number must be 16 digits";
-    // if (!expiryDate || !/^\d{2}\/\d{2}$/.test(expiryDate))
-    //   newErrors.expiryDate = "Expiry Date must be in MM/YY format";
-    // if (!cvv || !/^\d{3}$/.test(cvv)) newErrors.cvv = "CVV must be 3 digits";
+    if (!name) newErrors.name = "Name is required";
+    if (!address) newErrors.address = "Address is required";
+    if (!city) newErrors.city = "City is required";
+    if (!postal) newErrors.postal = "Postal Code is required";
+    const cleanedCardNumber = cardNumber.replace(/\s+/g, "");
+    if (!cleanedCardNumber || !/^\d{16}$/.test(cleanedCardNumber))
+      newErrors.cardNumber = "Card Number must be 16 digits";
+    if (!expiryDate || !/^\d{2}\/\d{2}$/.test(expiryDate))
+      newErrors.expiryDate = "Expiry Date must be in MM/YY format";
+    if (!cvv || !/^\d{3}$/.test(cvv)) newErrors.cvv = "CVV must be 3 digits";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -212,8 +210,8 @@ export default function CheckoutPage() {
                   key={item.id + item.type}
                   className="flex items-center justify-between p-4 border rounded-lg bg-gray-50"
                 >
-                  <div className="flex space-x-4">
-                    <div className="relative w-20 h-20 sm:w-16 sm:h-16 flex-shrink-0">
+                  <div className="flex items-center space-x-4">
+                    <div className="relative w-16 h-16 flex-shrink-0">
                       <Image
                         src={item.image}
                         alt={item.name}
@@ -226,11 +224,6 @@ export default function CheckoutPage() {
                       <h2 className="text-md sm:text-xl font-semibold">
                         {item.name}
                       </h2>
-                      {item.selectedItemsString && (
-                        <p className="text-sm sm:text-base max-w-[200px] font-medium text-gray-600">
-                          {item.selectedItemsString}
-                        </p>
-                      )}
 
                       <p className="text-sm sm:text-base font-medium text-gray-600">
                         Quantity: {item.quantity}
@@ -240,7 +233,36 @@ export default function CheckoutPage() {
                       </p>
                     </div>
                   </div>
-                  <div className="text-right">
+
+                  <div className="flex items-end flex-col-reverse sm:flex-row sm:space-x-4 text-right">
+                    {item.selectedItemsString && (
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button variant="outline" className="h-8">
+                            Details
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-md">
+                          <DialogHeader className="items-center">
+                            <div className="relative w-32 h-32 sm:w-20 sm:h-20 flex-shrink-0">
+                              <Image
+                                src={item.image}
+                                alt={item.name}
+                                fill
+                                sizes="100%"
+                                className="object-cover rounded-md"
+                              />
+                            </div>
+                            <DialogTitle className="text-2xl">
+                              {item.name}
+                            </DialogTitle>
+                            <DialogDescription className="">
+                              Selected Items: {item.selectedItemsString}
+                            </DialogDescription>
+                          </DialogHeader>
+                        </DialogContent>
+                      </Dialog>
+                    )}
                     <p className="font-semibold">
                       ${(item.price * item.quantity).toFixed(2)}
                     </p>
@@ -279,7 +301,7 @@ export default function CheckoutPage() {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {["name", "address", "city", "postal", "country"].map((field) => (
+              {["name", "address", "city", "postal"].map((field) => (
                 <div key={field} className="space-y-2">
                   <Label htmlFor={field}>{formatLabel(field)}</Label>
                   <Input
@@ -345,7 +367,6 @@ const formatLabel = (field: string): string => {
     address: "Address",
     city: "City",
     postal: "Postal Code",
-    country: "Country",
     cardNumber: "Card Number",
     expiryDate: "Expiry Date",
     cvv: "CVV",
@@ -363,7 +384,6 @@ const getPlaceholder = (field: string): string => {
     address: "123 Main St, Apt 4B",
     city: "City",
     postal: "Postal Code",
-    country: "Country",
     cardNumber: "1234 5678 9012 3456",
     expiryDate: "MM/YY",
     cvv: "123",
