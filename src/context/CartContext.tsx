@@ -20,7 +20,7 @@ interface CartItem extends Product {
 
 interface CartContextType {
   cart: CartItem[];
-  addToCart: (product: Product, selectedItems: SelectedItems) => void;
+  addToCart: (product: Product, selectedItems?: SelectedItems) => void;
   removeFromCart: (
     id: number,
     type: string,
