@@ -3,7 +3,7 @@ import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Pizza Delivery",
+  title: "Pizza Delivery | Delicious Pizza, Just a Click Away!",
   description: "Delicious Pizza, Just a Click Away!",
 };
 
