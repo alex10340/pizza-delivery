@@ -127,7 +127,7 @@ export default function OrderPage() {
                       src={item.image}
                       alt={item.name}
                       fill
-                      sizes="100%"
+                      sizes="128px"
                       className="object-cover rounded-md"
                     />
                   </div>
@@ -204,7 +204,7 @@ export default function OrderPage() {
                               src={item.image}
                               alt={item.name}
                               fill
-                              sizes="100%"
+                              sizes="128px"
                               className="object-cover rounded-md"
                             />
                           </div>

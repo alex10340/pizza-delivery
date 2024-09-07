@@ -123,7 +123,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
                 src={product.image}
                 alt={product.name}
                 fill
-                sizes="100%"
+                sizes="64px"
                 className="object-cover rounded-md"
               />
             </div>

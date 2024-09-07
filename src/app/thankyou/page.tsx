@@ -102,7 +102,7 @@ export default function ThankYouPage() {
                             src={item.image}
                             alt={item.name}
                             fill
-                            sizes="100%"
+                            sizes="64px"
                             className="object-cover rounded-md"
                           />
                         </div>
@@ -131,7 +131,7 @@ export default function ThankYouPage() {
                                     src={item.image}
                                     alt={item.name}
                                     fill
-                                    sizes="100%"
+                                    sizes="64px"
                                     className="object-cover rounded-md"
                                   />
                                 </div>

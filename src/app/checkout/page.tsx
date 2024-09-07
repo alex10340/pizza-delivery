@@ -228,7 +228,7 @@ export default function CheckoutPage() {
                         src={item.image}
                         alt={item.name}
                         fill
-                        sizes="100%"
+                        sizes="64px"
                         className="object-cover rounded-md"
                       />
                     </div>
@@ -257,7 +257,7 @@ export default function CheckoutPage() {
                                 src={item.image}
                                 alt={item.name}
                                 fill
-                                sizes="100%"
+                                sizes="128px"
                                 className="object-cover rounded-md"
                               />
                             </div>

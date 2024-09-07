@@ -125,7 +125,7 @@ export function DealsSlider() {
                       src={combo.image}
                       alt="combo image"
                       fill
-                      sizes="100%"
+                      sizes="400px"
                       className="object-cover rounded-xl"
                     />
                   </div>
@@ -155,7 +155,7 @@ export function DealsSlider() {
                                 src={combo.image}
                                 alt={combo.name}
                                 fill
-                                sizes="100%"
+                                sizes="128px"
                                 className="object-cover rounded-md"
                               />
                             </div>

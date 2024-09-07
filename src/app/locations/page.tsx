@@ -22,7 +22,7 @@ export default function LocationsPage() {
           <Image
             src={"/locations/downtown.webp"}
             fill
-            sizes="100%"
+            sizes="384px"
             alt="pizza place"
             className="object-cover object-top rounded-2xl border-4 border-primary"
           ></Image>
@@ -63,7 +63,7 @@ export default function LocationsPage() {
             src={"/locations/uptown.webp"}
             fill
             alt="pizza place"
-            sizes="100%"
+            sizes="384px"
             className="object-cover object-top rounded-2xl border-4 border-primary"
           ></Image>
         </div>
