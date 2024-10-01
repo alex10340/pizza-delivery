@@ -35,7 +35,7 @@ export default function ThankYouPage() {
     setisInitialized(true);
 
     const progressTimer = setTimeout(() => setProgress(100), 500);
-    const deliveryTimer = setTimeout(() => setIsDelivered(true), 30000);
+    const deliveryTimer = setTimeout(() => setIsDelivered(true), 8000);
 
     return () => {
       clearTimeout(progressTimer);

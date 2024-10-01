@@ -46,7 +46,7 @@ const MenuSection = () => {
           return (
             <Card
               key={pizza.id}
-              className={`flex flex-col relative border-2 ${borderColor} hover:shadow-xl transition-all duration-500`}
+              className={`flex flex-col relative border-2 ${borderColor} shadow-lg transition-all duration-500`}
             >
               <CardHeader className="grow">
                 <CardTitle>{pizza.name}</CardTitle>
@@ -59,7 +59,7 @@ const MenuSection = () => {
                     src={pizza.image}
                     alt="pizza image"
                     fill
-                    sizes="100vw"
+                    sizes="300px"
                     className="object-cover rounded-xl"
                   />
                 </div>
@@ -93,7 +93,7 @@ const MenuSection = () => {
           return (
             <Card
               key={beverage.id}
-              className={`flex flex-col relative border-2 border-gray-200 hover:shadow-xl transition-all duration-500`}
+              className={`flex flex-col relative border-2 border-gray-200 shadow-lg transition-all duration-500`}
             >
               <CardHeader className="grow">
                 <CardTitle>{beverage.name}</CardTitle>
@@ -106,7 +106,7 @@ const MenuSection = () => {
                     src={beverage.image}
                     alt="beverage image"
                     fill
-                    sizes="100vw"
+                    sizes="300px"
                     className="object-cover rounded-xl"
                   />
                 </div>
@@ -133,7 +133,7 @@ const MenuSection = () => {
           return (
             <Card
               key={dessert.id}
-              className={`flex flex-col relative border-2 border-gray-200 hover:shadow-xl transition-all duration-500`}
+              className={`flex flex-col relative border-2 border-gray-200 shadow-lg transition-all duration-500`}
             >
               <CardHeader className="grow">
                 <CardTitle>{dessert.name}</CardTitle>
@@ -146,7 +146,7 @@ const MenuSection = () => {
                     src={dessert.image}
                     alt="dessert image"
                     fill
-                    sizes="100vw"
+                    sizes="300px"
                     className="object-cover object-top rounded-xl"
                   />
                 </div>
