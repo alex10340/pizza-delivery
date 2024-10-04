@@ -87,6 +87,10 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
     let updatedCart: CartItem[] = [];
 
+    const updatedItem = updatedCart.find(
+      (item) => item.id === product.id && item.type === product.type
+    );
+
     setCart((prevCart) => {
       const existingItem = prevCart.find(
         (item) =>
@@ -112,12 +116,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
     toast.custom(
       (t) => {
-        const updatedItem = updatedCart.find(
-          (item) => item.id === product.id && item.type === product.type
-        );
-
         return (
-          <div className="flex w-full justify-center bg-transparent p-4 space-x-4 rounded-xl shadow-lg border border-gray-200">
+          <div className="flex w-full justify-center items-center bg-transparent p-4 space-x-4 rounded-xl shadow-lg border border-gray-200">
             <div className="relative w-16 h-16">
               <Image
                 src={product.image}
