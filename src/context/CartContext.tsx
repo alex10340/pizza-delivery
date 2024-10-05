@@ -85,26 +85,26 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       ].join(", ");
     }
 
-    let updatedCart: CartItem[] = [];
-
-    const updatedItem = updatedCart.find(
-      (item) => item.id === product.id && item.type === product.type
-    );
-
     setCart((prevCart) => {
+      // Look for an existing item in the current cart state
       const existingItem = prevCart.find(
         (item) =>
           item.id === product.id &&
           item.type === product.type &&
           item.selectedItemsString === selectedItemsString
       );
+
+      let updatedCart: CartItem[] = [];
+
       if (existingItem) {
+        // Update the quantity if the item exists
         updatedCart = prevCart.map((item) =>
           item.id === product.id && item.type === product.type
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       } else {
+        // Add new item if it doesn't exist
         updatedCart = [
           ...prevCart,
           { ...product, quantity: 1, selectedItemsString },
@@ -145,15 +145,33 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
               variant="destructive"
               className="font-bold"
               onClick={() => {
-                if (updatedItem && updatedItem.quantity === 1) {
-                  removeFromCart(product.id, product.type, selectedItemsString);
-                } else {
-                  decreaseQuantity(
-                    product.id,
-                    product.type,
-                    selectedItemsString
+                setCart((prevCart) => {
+                  const updatedItem = prevCart.find(
+                    (item) =>
+                      item.id === product.id &&
+                      item.type === product.type &&
+                      item.selectedItemsString === selectedItemsString
                   );
-                }
+
+                  // If the updatedItem exists and has a quantity of 1, remove it
+                  if (updatedItem && updatedItem.quantity === 1) {
+                    return prevCart.filter(
+                      (item) =>
+                        item.id !== product.id ||
+                        item.type !== product.type ||
+                        item.selectedItemsString !== selectedItemsString
+                    );
+                  }
+
+                  // Otherwise, just decrease its quantity
+                  return prevCart.map((item) =>
+                    item.id === product.id &&
+                    item.type === product.type &&
+                    item.selectedItemsString === selectedItemsString
+                      ? { ...item, quantity: item.quantity - 1 }
+                      : item
+                  );
+                });
                 toast.dismiss(t);
               }}
             >
