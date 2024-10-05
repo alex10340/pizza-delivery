@@ -29,7 +29,10 @@ const Hero = () => {
             et!
           </p>
           <Link href="/#menu">
-            <Button className="mt-12 w-full  text-md font-bold" size={"lg"}>
+            <Button
+              className="mt-12 w-80 sm:w-full text-md font-bold"
+              size={"lg"}
+            >
               <Pizza className="mr-2" />
               Order Now
             </Button>

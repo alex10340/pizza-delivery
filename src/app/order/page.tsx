@@ -130,9 +130,9 @@ export default function OrderPage() {
                     />
                   </div>
                   <div className="flex-1 text-center sm:text-left">
-                    <h2 className="text-lg sm:text-xl font-semibold">
+                    <p className="md:text-xl font-semibold leading-5">
                       {item.name}
-                    </h2>
+                    </p>
                     <p className="text-sm font-medium pr-4 hidden min-[900px]:block text-gray-600">
                       {item.selectedItemsString
                         ? `Selected Items: ${item.selectedItemsString}`

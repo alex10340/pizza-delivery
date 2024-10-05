@@ -231,7 +231,7 @@ export default function CheckoutPage() {
                       />
                     </div>
                     <div>
-                      <p className="text-md sm:text-lg font-semibold">
+                      <p className="sm:text-lg font-semibold leading-5">
                         {item.name}
                       </p>
                       <p className="text-sm text-muted-foreground">

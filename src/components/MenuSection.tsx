@@ -88,7 +88,7 @@ const MenuSection = () => {
       >
         Beverages
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 p-6 pt-12 mx-auto max-w-[1400px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:max-w-[800px] xl:max-w-[1400px] xl:grid-cols-4 gap-8 p-6 pt-12 mx-auto">
         {beverages.map((beverage) => {
           return (
             <Card
@@ -128,7 +128,7 @@ const MenuSection = () => {
       >
         Desserts
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 p-6 pt-12 mx-auto max-w-[1400px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:max-w-[800px] xl:max-w-[1400px] xl:grid-cols-4 gap-8 p-6 pt-12 mx-auto ">
         {desserts.map((dessert) => {
           return (
             <Card

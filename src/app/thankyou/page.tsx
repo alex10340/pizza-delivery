@@ -107,7 +107,9 @@ export default function ThankYouPage() {
                           />
                         </div>
                         <div>
-                          <h3 className="text-lg font-semibold">{item.name}</h3>
+                          <p className="sm:text-lg font-semibold leading-5">
+                            {item.name}
+                          </p>
                           <p className="text-sm text-muted-foreground">
                             {item.quantity} x ${item.price}
                           </p>
@@ -151,13 +153,30 @@ export default function ThankYouPage() {
                       </div>
                     </div>
                   ))}
+                  <div className="flex text-sm justify-between px-1 border-t pt-4 mt-4">
+                    <p>Subtotal</p>
+                    <p>
+                      $
+                      {cartCopy
+                        .reduce(
+                          (total, item) => total + item.price * item.quantity,
+                          0
+                        )
+                        .toFixed(2)}
+                    </p>
+                  </div>
+                  <div className="flex justify-between px-1 text-sm">
+                    <p>Delivery Fee</p>
+                    <p>$3.99</p>
+                  </div>
                   <div className="flex justify-between font-bold text-lg border-t pt-4 mt-4">
                     <p>Total</p>
                     <p>
                       $
                       {cartCopy
                         .reduce(
-                          (total, item) => total + item.price * item.quantity,
+                          (total, item) =>
+                            total + 3.99 + item.price * item.quantity,
                           0
                         )
                         .toFixed(2)}

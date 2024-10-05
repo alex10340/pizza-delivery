@@ -160,9 +160,9 @@ export function DealsSlider() {
                               />
                             </div>
                             <div className="flex-1 text-center sm:text-left">
-                              <h2 className="text-xl font-semibold ">
+                              <p className="text-xl font-semibold ">
                                 {combo.name}
-                              </h2>
+                              </p>
 
                               <p className="font-medium hidden md:block text-gray-600">
                                 {combo.description}
