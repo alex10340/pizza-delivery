@@ -162,7 +162,7 @@ export default function CheckoutPage() {
   if (!isInitialized) {
     return (
       <div className="max-w-[1200px] mx-auto p-6 my-6 space-y-10">
-        <h1 className="underline decoration-primary underline-offset-8 decoration-dashed scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+        <h1 className="underline text-center decoration-primary underline-offset-8 decoration-dashed scroll-m-20 text-4xl font-extrabold tracking-tight md:text-5xl">
           Checkout
         </h1>
         {renderSkeleton()}
@@ -173,7 +173,7 @@ export default function CheckoutPage() {
   if (cart.length === 0) {
     return (
       <div className="max-w-[1200px] mx-auto p-6 my-6">
-        <h1 className="underline decoration-primary underline-offset-8 decoration-dashed pb-10 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+        <h1 className="underline text-center decoration-primary underline-offset-8 decoration-dashed pb-10 scroll-m-20 text-4xl font-extrabold tracking-tight md:text-5xl">
           Checkout
         </h1>
         <Card className="text-center">
@@ -184,7 +184,7 @@ export default function CheckoutPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <Link href="/#menu">
+            <Link passHref legacyBehavior href="/#menu">
               <Button variant="link" className="text-yellow-500">
                 Add items to continue
               </Button>
@@ -198,9 +198,7 @@ export default function CheckoutPage() {
   return (
     <div className="max-w-[1200px] mx-auto p-6 my-6 space-y-10">
       <h1
-        className={`${
-          cart.length === 0 ? "text-center" : ""
-        } underline decoration-primary underline-offset-8 decoration-dashed scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl`}
+        className={`underline text-center decoration-primary underline-offset-8 decoration-dashed scroll-m-20 text-4xl font-extrabold tracking-tight md:text-5xl`}
       >
         Checkout
       </h1>
@@ -233,7 +231,9 @@ export default function CheckoutPage() {
                       />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold">{item.name}</h3>
+                      <p className="text-md sm:text-lg font-semibold">
+                        {item.name}
+                      </p>
                       <p className="text-sm text-muted-foreground">
                         {item.quantity} x ${item.price}
                       </p>
@@ -252,12 +252,12 @@ export default function CheckoutPage() {
                         </DialogTrigger>
                         <DialogContent className="sm:max-w-md">
                           <DialogHeader className="items-center">
-                            <div className="relative w-32 h-32 sm:w-20 sm:h-20 flex-shrink-0">
+                            <div className="relative w-20 h-20 flex-shrink-0">
                               <Image
                                 src={item.image}
                                 alt={item.name}
                                 fill
-                                sizes="128px"
+                                sizes="80px"
                                 className="object-cover rounded-md"
                               />
                             </div>
@@ -277,13 +277,32 @@ export default function CheckoutPage() {
                   </div>
                 </div>
               ))}
+
+              <div className="flex text-sm justify-between px-1 border-t pt-4 mt-4">
+                <p>Subtotal</p>
+                <p>
+                  $
+                  {cart
+                    .reduce(
+                      (total, item) => total + item.price * item.quantity,
+                      0
+                    )
+                    .toFixed(2)}
+                </p>
+              </div>
+              <div className="flex justify-between px-1 text-sm">
+                <p>Delivery Fee</p>
+                <p>$3.99</p>
+              </div>
+
               <div className="flex justify-between font-bold text-lg border-t pt-4 mt-4">
                 <p>Total</p>
                 <p>
                   $
                   {cart
                     .reduce(
-                      (total, item) => total + item.price * item.quantity,
+                      (total, item) =>
+                        total + 3.99 + item.price * item.quantity,
                       0
                     )
                     .toFixed(2)}

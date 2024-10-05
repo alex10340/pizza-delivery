@@ -23,14 +23,14 @@ const Hero = () => {
             <br />
             Just a Click Away!
           </h1>
-          <p className="text-sm sm:text-base leading-6 mt-6 opacity-80 max-w-[400px]">
+          <p className="text-sm sm:text-base mt-6 max-w-[400px] xl:max-w-[495px]">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa eum
             natus alias quasi perferendis facere neque voluptates quaerat, harum
             et!
           </p>
           <Link href="/#menu">
-            <Button className="mt-12 w-[80%] text-md font-bold" size={"lg"}>
-              <Pizza className="mr-2 animate-in" />
+            <Button className="mt-12 w-full  text-md font-bold" size={"lg"}>
+              <Pizza className="mr-2" />
               Order Now
             </Button>
           </Link>

@@ -128,18 +128,16 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
               />
             </div>
             <div className="flex-1 text-left">
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Added to cart!
-              </p>
-              <p className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+              <p className="text-sm text-muted-foreground">Added to cart!</p>
+              <p className="md:text-lg leading-5 font-semibold">
                 {product.name}
               </p>
               {selectedItemsString && (
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <p className="text-sm line-clamp-3 text-muted-foreground">
                   {selectedItemsString}
                 </p>
               )}
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-sm text-muted-foreground">
                 ${product.price.toFixed(2)}
               </p>
             </div>

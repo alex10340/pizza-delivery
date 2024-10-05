@@ -22,20 +22,20 @@ const Navbar = () => {
 
         <div className=" hidden sm:block lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2">
           <div className="space-x-2">
-            <Link href="/">
+            <Link passHref legacyBehavior href="/">
               <Button variant={"ghost"}>Home</Button>
             </Link>
 
-            <Link href="/#menu">
+            <Link passHref legacyBehavior href="/#menu">
               <Button variant={"ghost"}>Menu</Button>
             </Link>
 
-            <Link href="/locations">
+            <Link passHref legacyBehavior href="/locations">
               <Button variant={"ghost"}>Locations</Button>
             </Link>
           </div>
         </div>
-        <Link href="/order">
+        <Link passHref legacyBehavior href="/order">
           <Button>
             <ShoppingBag className="mr-2 h-4 w-4" />
             {getTotalItems()}

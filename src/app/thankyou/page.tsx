@@ -126,7 +126,7 @@ export default function ThankYouPage() {
                             </DialogTrigger>
                             <DialogContent className="sm:max-w-md">
                               <DialogHeader className="items-center">
-                                <div className="relative w-32 h-32 sm:w-20 sm:h-20 flex-shrink-0">
+                                <div className="relative w-20 h-20 flex-shrink-0">
                                   <Image
                                     src={item.image}
                                     alt={item.name}
@@ -166,7 +166,7 @@ export default function ThankYouPage() {
                 </CardContent>
               </Card>
             </div>
-            <Link href="/">
+            <Link passHref legacyBehavior href="/">
               <Button variant="link" className="mt-6 text-primary">
                 Go back to the Home page
               </Button>

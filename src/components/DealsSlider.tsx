@@ -150,12 +150,12 @@ export function DealsSlider() {
                       <div className="text-black space-y-6">
                         <div className="flex flex-col sm:flex-row items-center justify-between p-4 border rounded-lg shadow-sm bg-gray-50">
                           <div className="flex items-center space-x-4 w-full sm:w-auto">
-                            <div className="relative w-32 h-32 sm:w-20 sm:h-20 flex-shrink-0">
+                            <div className="relative w-20 h-20 flex-shrink-0">
                               <Image
                                 src={combo.image}
                                 alt={combo.name}
                                 fill
-                                sizes="128px"
+                                sizes="80px"
                                 className="object-cover rounded-md"
                               />
                             </div>
@@ -287,11 +287,11 @@ export function DealsSlider() {
           ))}
         </CarouselContent>
 
-        <div className="lg:hidden">
+        <div className="sm:hidden">
           <CarouselPrevious className="absolute top-100 mt-8 left-[30%]" />
           <CarouselNext className="absolute top-100 mt-8 right-[30%]" />
         </div>
-        <div className="hidden lg:block">
+        <div className="hidden sm:block">
           <CarouselPrevious />
           <CarouselNext />
         </div>

@@ -25,7 +25,7 @@ const AboutSection = () => {
           natus alias quasi perferendis facere neque voluptates quaerat, harum
           et!
         </p>
-        <Link href="/locations">
+        <Link passHref legacyBehavior href="/locations">
           <Button className="mt-12 w-[80%] text-md font-bold" size={"lg"}>
             <MapPinned className="mr-2" />
             View Locations

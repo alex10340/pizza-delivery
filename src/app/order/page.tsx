@@ -9,11 +9,9 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
-  DialogFooter,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
@@ -41,7 +39,7 @@ export default function OrderPage() {
               className="flex flex-col sm:flex-row items-center justify-between p-4 border rounded-lg shadow-sm bg-gray-50"
             >
               <div className="flex items-center space-x-4 w-full sm:w-auto">
-                <Skeleton className="w-32 h-32 sm:w-20 sm:h-20 rounded-md flex-shrink-0" />
+                <Skeleton className="w-20 h-20 rounded-md flex-shrink-0" />
                 <div className="flex-1 text-center sm:text-left">
                   <Skeleton className="h-5 w-3/4" />
                   <Skeleton className="h-4 w-1/2 mt-2" />
@@ -67,7 +65,7 @@ export default function OrderPage() {
   if (!isInitialized) {
     return (
       <div className="max-w-[1200px] mx-auto p-6 my-6">
-        <h1 className="underline decoration-primary underline-offset-8 decoration-dashed pb-10 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+        <h1 className="underline text-center decoration-primary underline-offset-8 decoration-dashed pb-10 scroll-m-20 text-4xl font-extrabold tracking-tight md:text-5xl">
           Your Order
         </h1>
         <div className="space-y-6">{renderSkeleton()}</div>
@@ -78,7 +76,7 @@ export default function OrderPage() {
   if (cart.length === 0) {
     return (
       <div className="max-w-[1200px] mx-auto p-6 my-6">
-        <h1 className="underline decoration-primary underline-offset-8 decoration-dashed pb-10 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+        <h1 className="underline text-center decoration-primary underline-offset-8 decoration-dashed pb-10 scroll-m-20 text-4xl font-extrabold tracking-tight md:text-5xl">
           Your Order
         </h1>
         <Card className="text-center">
@@ -89,7 +87,7 @@ export default function OrderPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <Link href="/#menu">
+            <Link passHref legacyBehavior href="/#menu">
               <Button variant="link" className="text-yellow-500">
                 Add items to continue
               </Button>
@@ -103,7 +101,7 @@ export default function OrderPage() {
   return (
     <div className="max-w-[1200px] mx-auto p-6 my-6">
       <h1
-        className={`underline decoration-primary underline-offset-8 decoration-dashed pb-10 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl`}
+        className={`underline text-center decoration-primary underline-offset-8 decoration-dashed pb-10 scroll-m-20 text-4xl font-extrabold tracking-tight md:text-5xl`}
       >
         Your Order
       </h1>
@@ -122,12 +120,12 @@ export default function OrderPage() {
                 className="flex flex-col sm:flex-row items-center justify-between p-4 border rounded-lg shadow-sm bg-gray-50"
               >
                 <div className="flex items-center space-x-4 w-full sm:w-auto">
-                  <div className="relative w-32 h-32 sm:w-20 sm:h-20 flex-shrink-0">
+                  <div className="relative w-20 h-20 flex-shrink-0">
                     <Image
                       src={item.image}
                       alt={item.name}
                       fill
-                      sizes="128px"
+                      sizes="80px"
                       className="object-cover rounded-md"
                     />
                   </div>
@@ -136,7 +134,9 @@ export default function OrderPage() {
                       {item.name}
                     </h2>
                     <p className="text-sm font-medium pr-4 hidden min-[900px]:block text-gray-600">
-                      {item.description}
+                      {item.selectedItemsString
+                        ? `Selected Items: ${item.selectedItemsString}`
+                        : item.description}
                     </p>
                     <p className="font-medium text-gray-600">
                       Price: ${item.price}
@@ -188,35 +188,37 @@ export default function OrderPage() {
                     +
                   </Button>
                   {item.selectedItemsString && (
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <Button
-                          variant="outline"
-                          className="text-xs w-16 h-8 sm:text-sm sm:w-auto"
-                        >
-                          Details
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent className="sm:max-w-md">
-                        <DialogHeader className="items-center">
-                          <div className="relative w-32 h-32 sm:w-20 sm:h-20 flex-shrink-0">
-                            <Image
-                              src={item.image}
-                              alt={item.name}
-                              fill
-                              sizes="128px"
-                              className="object-cover rounded-md"
-                            />
-                          </div>
-                          <DialogTitle className="text-2xl">
-                            {item.name}
-                          </DialogTitle>
-                          <DialogDescription className="">
-                            Selected Items: {item.selectedItemsString}
-                          </DialogDescription>
-                        </DialogHeader>
-                      </DialogContent>
-                    </Dialog>
+                    <div className="min-[900px]:hidden">
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button
+                            variant="outline"
+                            className="text-xs w-16 h-8 sm:text-sm sm:w-auto"
+                          >
+                            Details
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-md">
+                          <DialogHeader className="items-center">
+                            <div className="relative w-20 h-20 flex-shrink-0">
+                              <Image
+                                src={item.image}
+                                alt={item.name}
+                                fill
+                                sizes="80px"
+                                className="object-cover rounded-md"
+                              />
+                            </div>
+                            <DialogTitle className="text-2xl">
+                              {item.name}
+                            </DialogTitle>
+                            <DialogDescription className="">
+                              Selected Items: {item.selectedItemsString}
+                            </DialogDescription>
+                          </DialogHeader>
+                        </DialogContent>
+                      </Dialog>
+                    </div>
                   )}
 
                   <Button
@@ -236,7 +238,7 @@ export default function OrderPage() {
               </div>
             ))}
             <div className="flex justify-between font-bold text-lg border-t pt-4 mt-4">
-              <span>Total:</span>
+              <span>Subtotal:</span>
               <span>
                 $
                 {cart
@@ -256,17 +258,17 @@ export default function OrderPage() {
               Want to add more items?
             </h3>
             <div className="flex justify-center sm:justify-start gap-4 flex-wrap">
-              <Link href="/#menu">
+              <Link passHref legacyBehavior href="/#menu">
                 <Button variant={"outline"}>
                   + <Pizza className="w-5 mr-1.5 ml-0.5" /> Add Pizzas
                 </Button>
               </Link>
-              <Link href="/#beverages">
+              <Link passHref legacyBehavior href="/#beverages">
                 <Button variant={"outline"}>
                   + <CupSoda className="w-5 mr-1.5 ml-0.5" /> Add Beverages
                 </Button>
               </Link>
-              <Link href="/#desserts">
+              <Link passHref legacyBehavior href="/#desserts">
                 <Button variant={"outline"}>
                   + <CakeSlice className="w-5 mr-1.5 ml-0.5" /> Add Desserts
                 </Button>
@@ -274,8 +276,8 @@ export default function OrderPage() {
             </div>
           </div>
 
-          <div className="w-full sm:w-auto text-center sm:text-right">
-            <Link href="/checkout">
+          <div className="text-center sm:text-right">
+            <Link passHref legacyBehavior href="/checkout">
               <Button className="w-full sm:w-auto bg-green-500 text-white hover:bg-green-600">
                 Proceed to Checkout
               </Button>
